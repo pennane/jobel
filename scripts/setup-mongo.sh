@@ -1,0 +1,1 @@
+docker run -it -d -p 27017:27017 --name web-project-mongo mongo:latest
