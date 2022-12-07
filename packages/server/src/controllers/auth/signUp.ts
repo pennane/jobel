@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { User } from '../../models/UserModel'
+import { User } from '../../models/User'
 import bcrypt from 'bcrypt'
 import { ERole } from '../../types'
 
