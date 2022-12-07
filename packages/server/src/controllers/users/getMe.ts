@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { User } from '../../models/User'
+import { User } from '../../models/UserModel'
 
 export const getMe: RequestHandler = async (req, res) => {
   const id = req.tokenPayload?._id
