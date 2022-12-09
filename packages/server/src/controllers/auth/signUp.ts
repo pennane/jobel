@@ -2,6 +2,8 @@ import { RequestHandler } from 'express'
 import { User } from '../../models/User'
 import bcrypt from 'bcrypt'
 import { ERole } from '../../types'
+import jwt, { JwtPayload } from 'jsonwebtoken'
+import { config } from '../../config'
 
 export const signUp: RequestHandler = async (req, res) => {
   const { userName, password } = req.body
@@ -38,5 +40,14 @@ export const signUp: RequestHandler = async (req, res) => {
 
   const savedUser = await user.save()
 
-  res.status(201).send(savedUser)
+  const tokenPayload: JwtPayload = {
+    userName: savedUser.profile.userName,
+    _id: savedUser._id,
+    roles: savedUser.roles,
+  }
+
+  const token = jwt.sign(tokenPayload, config.JWT_SECRET)
+
+  res.status(201).send({ token, user: tokenPayload })
+
 }
