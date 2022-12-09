@@ -18,27 +18,45 @@ const getStoredUser = () => {
   }
 }
 
+const authPost = async (endpoint, data) => {
+  const response = await fetch(`${API_BASE_URL}auth/${endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const json = await response.json()
+  return json
+}
+
 export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(getStoredToken())
   const [user, setUser] = useState(getStoredUser())
 
-  const login = ({ userName, password }) => {
+  const setAuthValues = ({ user, token }) => {
+    setToken(token)
+    setUser(user)
+  }
+
+  const login = async ({ userName, password }) => {
     if (!userName || !password) return
 
+    const { token, user } = await authPost('login', { userName, password })
+    setAuthValues({ token, user })
+  }
 
-    fetch(`${API_BASE_URL}auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ userName, password })
-    })
-      .then(res => res.json())
-      .then(({ token, user }) => {
-        setToken(token)
-        setUser(user)
-      })
 
+  const signup = async ({ userName, password }) => {
+    if (!userName || !password) return
+
+    const { token, user } = await authPost('signup', { userName, password })
+    setAuthValues({ token, user })
+  }
+
+  const logout = () => {
+    setToken(null)
+    setUser(null)
   }
 
   useEffect(() => {
@@ -50,7 +68,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [user])
 
   return (
-    <AuthContext.Provider value={{ user, login, token }}>
+    <AuthContext.Provider value={{ user, login, signup, token, isLoggedIn: !!user, logout }}>
       {children}
     </AuthContext.Provider>
   )
