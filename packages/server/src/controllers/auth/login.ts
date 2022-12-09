@@ -37,5 +37,5 @@ export const login: RequestHandler = async (req, res) => {
 
   const token = jwt.sign(tokenPayload, config.JWT_SECRET)
 
-  res.status(200).send({ token, ...tokenPayload })
+  res.status(200).send({ token, user: tokenPayload })
 }
