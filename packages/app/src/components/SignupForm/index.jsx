@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { API_BASE_URL } from '../../constants'
 import { useAuthContext } from '../../hooks/useAuthContext'
 
 export const SignupForm = () => {
@@ -21,11 +20,10 @@ export const SignupForm = () => {
   return (<div>
     {isLoggedIn && "logged in as " + user.userName}
     {!isLoggedIn &&
-
       <form onSubmit={handleSignup}>
         <h3>Sign up</h3>
-        <div><label htmlFor="username">Username:</label><input id="username" type="text" /></div>
-        <div><label htmlFor="password">Password:</label><input id="password" type="password" /></div>
+        <div><label htmlFor="signup-username">Username:</label><input id="signup-username" type="text" /></div>
+        <div><label htmlFor="signup-password">Password:</label><input id="signup-password" type="password" /></div>
         <input type="submit" value="send" disabled={loading} />
       </form>
     }

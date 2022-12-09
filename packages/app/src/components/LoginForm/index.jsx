@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { API_BASE_URL } from '../../constants'
 import { useAuthContext } from '../../hooks/useAuthContext'
 
 export const LoginForm = () => {
@@ -8,8 +7,8 @@ export const LoginForm = () => {
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e) => {
-    setLoading(true)
     e.preventDefault();
+    setLoading(true)
 
     const userName = e.target.username.value
     const password = e.target.password.value
@@ -23,8 +22,8 @@ export const LoginForm = () => {
     {!isLoggedIn &&
       <form onSubmit={handleLogin}>
         <h3>Login</h3>
-        <div><label htmlFor="username">Username:</label><input id="username" type="text" /></div>
-        <div><label htmlFor="password">Password:</label><input id="password" type="password" /></div>
+        <div><label htmlFor="login-username">Username:</label><input id="login-username" type="text" /></div>
+        <div><label htmlFor="login-password">Password:</label><input id="login-password" type="password" /></div>
         <input type="submit" value="send" disabled={loading} />
       </form>
     }
