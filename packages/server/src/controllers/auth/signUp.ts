@@ -42,12 +42,11 @@ export const signUp: RequestHandler = async (req, res) => {
 
   const tokenPayload: JwtPayload = {
     userName: savedUser.profile.userName,
-    _id: savedUser._id as any,
+    _id: savedUser._id,
     roles: savedUser.roles,
   }
 
   const token = jwt.sign(tokenPayload, config.JWT_SECRET)
 
   res.status(201).send({ token, user: tokenPayload })
-
 }
