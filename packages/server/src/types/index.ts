@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose"
+import { Types } from 'mongoose'
 
 export enum ERole {
   User = 'user',
@@ -7,6 +7,6 @@ export enum ERole {
 
 export type TTokenPayload = {
   userName?: string
-  _id?: ObjectId
+  _id?: Types.ObjectId
   roles?: ERole[]
 }
