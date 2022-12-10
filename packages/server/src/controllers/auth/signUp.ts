@@ -42,7 +42,7 @@ export const signUp: RequestHandler = async (req, res) => {
 
   const tokenPayload: JwtPayload = {
     userName: savedUser.profile.userName,
-    _id: savedUser._id,
+    _id: savedUser._id as any,
     roles: savedUser.roles,
   }
 

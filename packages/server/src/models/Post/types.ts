@@ -1,7 +1,7 @@
-import { Document, ObjectId } from 'mongoose'
+import { ObjectId } from 'mongoose'
 import { IComment } from '../Comment/types'
 
-export interface IPost extends Document {
+export interface IPost {
   userId: ObjectId
   voters: string[]
   score: number
