@@ -7,11 +7,13 @@ export const RootLayout = () => {
       <nav className={classes.nav}>
         <NavLink to="/">
           <div className={classes.homeLink}>
-
             <img src="/64.png" alt=""></img>
             <header>JOBEL</header>
-
           </div>
+        </NavLink>
+
+        <NavLink to="/settings">
+          <div className={classes.navLink}>⚙️</div>
         </NavLink>
       </nav>
       <main>
@@ -21,4 +23,3 @@ export const RootLayout = () => {
     </div>
   )
 }
-
