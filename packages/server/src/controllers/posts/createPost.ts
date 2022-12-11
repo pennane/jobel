@@ -24,5 +24,5 @@ export const createPost: RequestHandler = async (req, res) => {
 
   const savedPost = await post.save()
 
-  res.status(200).send(savedPost)
+  res.status(200).send({ post: savedPost })
 }

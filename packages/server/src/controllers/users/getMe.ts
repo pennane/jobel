@@ -8,5 +8,5 @@ export const getMe: RequestHandler = async (req, res) => {
 
   const user = await User.findById(id)
 
-  res.send(user)
+  res.send({ user })
 }

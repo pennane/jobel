@@ -11,5 +11,5 @@ export const getById: RequestHandler = async (req, res) => {
     return res.status(404).send({ error: 'User does not exist' })
   }
 
-  res.send(user)
+  res.send({ user })
 }
