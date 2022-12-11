@@ -12,12 +12,8 @@ export const PostView = () => {
     return <p>{JSON.stringify(error.message)}</p>
   }
 
-  if (loading) {
+  if (loading || !data) {
     return null
-  }
-
-  if (!data) {
-    return <p>failed to fetch</p>
   }
 
   const post = data.post
