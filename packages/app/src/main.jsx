@@ -6,6 +6,7 @@ import { RootLayout } from './layouts/RootLayout'
 import { PostView } from './views/PostView'
 import { MainView } from './views/MainView'
 import { NotFound } from './views/NotFound'
+import { SettingsView } from './views/SettingsView'
 import { AuthContextProvider } from './context/AuthContext'
 
 const router = createBrowserRouter([
@@ -16,16 +17,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <MainView />
+        element: <MainView />,
       },
       {
         path: '/posts/:id',
-        element: <PostView />
+        element: <PostView />,
+      },
+      {
+        path: '/settings',
+        element: <SettingsView />,
       },
     ],
-  }
+  },
 ])
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
