@@ -7,7 +7,6 @@ export const userSchema = new Schema<IUser>({
     userName: {
       type: String,
       required: true,
-      unique: true,
       uniqueCaseInsensitive: true,
     },
     fullName: {
