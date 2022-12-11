@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import { RootLayout } from './layouts/RootLayout'
+import { PostView } from './views/PostView'
 import { MainView } from './views/MainView'
 import { NotFound } from './views/NotFound'
 import { AuthContextProvider } from './context/AuthContext'
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <MainView />
+      },
+      {
+        path: '/posts/:id',
+        element: <PostView />
       },
     ],
   }

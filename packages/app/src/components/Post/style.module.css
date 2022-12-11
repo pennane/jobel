@@ -1,0 +1,44 @@
+.postWrapper > a {
+  text-decoration: none;
+}
+
+.post {
+  padding: 1rem;
+  background-color: #02123c;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--small-box-shadow);
+  color: var(--text-color);
+}
+
+.post > header {
+}
+
+.post > section {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+.post main {
+  min-height: 100px;
+  margin-bottom: 1rem;
+}
+.post aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post > footer {
+}
+
+.vote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem;
+}
