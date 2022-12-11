@@ -31,12 +31,14 @@ npm install typescript -g
 - In the future it can be started with `./scripts/start-mongo.sh`
 - Mongo can be killed with `./scripts/stop-mongo.sh`
 
-5. Create `.env` file under ´packages/app´ and `packages/server`
+5. Create `.env` file under ´packages/app´, `packages/server`, and `packages/og`
 
 .env content for `packages/app/.env`
 
 ```sh
-VITE_BACKEND_URL=127.0.0.1:3000
+VITE_BACKEND_URL=http://127.0.0.1:3000
+OG_ENCRYPTION_KEY=<somestringhere>
+OG_URL=http://127.0.0.1:3001
 ```
 
 .env content for `packages/server/.env`
@@ -45,7 +47,13 @@ VITE_BACKEND_URL=127.0.0.1:3000
 MONGO_DB_URI=mongodb://127.0.0.1:27017
 MONGO_DB_NAME=web-project
 PORT=3000
-JWT_SECRET=somestringhere
+JWT_SECRET=<somestringhere>
+```
+
+.env content for `packages/og/.env`
+
+```sh
+OG_ENCRYPTION_KEY=same string as in the packages/app/.env
 ```
 
 ## Frontend
@@ -77,4 +85,18 @@ npm run dev -w server
 
 ```sh
 npm install <package_name> -w server
+```
+
+## OG image generation
+
+### Developing
+
+```sh
+npm run dev -w og
+```
+
+### Adding new dependencies
+
+```sh
+npm install <package_name> -w og
 ```
