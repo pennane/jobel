@@ -1,3 +1,4 @@
+import { isNil } from 'ramda'
 import { createContext, useState, useEffect, React } from 'react'
 import { API_BASE_URL } from '../../constants'
 
@@ -6,17 +7,26 @@ export const AuthContext = createContext()
 const LOCAL_STORAGE_TOKEN_KEY = "jobel-auth-token"
 const LOCAL_STORAGE_USER_KEY = "jobel-user"
 
-const getStoredToken = () => String(localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)) || null
-
-const getStoredUser = () => {
-  const userString = localStorage.getItem(LOCAL_STORAGE_USER_KEY)
-  if (!userString) return null
+const getLocalStorageValue = (key) => {
   try {
-    return JSON.parse(userString)
+    const [value] = JSON.parse(localStorage.getItem(key))
+    if (isNil(value)) return null
+    return value
   } catch {
     return null
   }
 }
+
+const setLocalStorageValue = (key, value) => {
+  if (isNil(value)) {
+    localStorage.removeItem(key)
+    return
+  }
+  localStorage.setItem(key, JSON.stringify([value]))
+}
+
+
+
 
 const authPost = async (endpoint, data) => {
   const response = await fetch(`${API_BASE_URL}auth/${endpoint}`, {
@@ -31,10 +41,11 @@ const authPost = async (endpoint, data) => {
 }
 
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(getStoredToken())
-  const [user, setUser] = useState(getStoredUser())
+  const [token, setToken] = useState(getLocalStorageValue(LOCAL_STORAGE_TOKEN_KEY))
+  const [user, setUser] = useState(getLocalStorageValue(LOCAL_STORAGE_USER_KEY))
 
   const setAuthValues = ({ user, token }) => {
+    console.log({ user, token });
     setToken(token)
     setUser(user)
   }
@@ -60,11 +71,11 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, JSON.stringify(token))
+    setLocalStorageValue(LOCAL_STORAGE_TOKEN_KEY, token)
   }, [token])
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user))
+    setLocalStorageValue(LOCAL_STORAGE_USER_KEY, user)
   }, [user])
 
   return (
