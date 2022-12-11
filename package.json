@@ -10,7 +10,8 @@
   "license": "ISC",
   "workspaces": [
     "packages/app",
-    "packages/server"
+    "packages/server",
+    "packages/og"
   ],
   "devDependencies": {}
 }
