@@ -1,5 +1,34 @@
 .rootLayout {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0.5rem;
+  box-shadow: var(--small-box-shadow);
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.homeLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.homeLink img {
+  image-rendering: pixelated;
+  width: 48px;
+}
+
+.homeLink header {
+  font-family: serif;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 4rem;
+  letter-spacing: -0.15rem;
 }

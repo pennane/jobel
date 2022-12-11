@@ -1,6 +1,51 @@
 .mainView {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
   margin: 2rem;
+}
+
+.postsWrapper {
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post {
+  padding: 1rem;
+  background-color: #02123c;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--small-box-shadow);
+}
+
+.post > header {
+}
+
+.post > section {
+  display: flex;
+  gap: 2rem;
+}
+.post main {
+  min-height: 100px;
+  margin-bottom: 1rem;
+}
+.post aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post > footer {
+}
+
+.vote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

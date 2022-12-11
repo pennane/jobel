@@ -9,12 +9,28 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --bg-color: #020f31;
+  --bg-color2: #fcf0cc;
+  --bg-color3: #1e3557;
+  --text-color: #dde6fe;
+  --accent-color: #f25f79;
+  --large-box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%),
+    0 8px 10px -6px rgb(0 0 0 / 10%);
+  --small-box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 body {
   margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-family: serif;
 }
