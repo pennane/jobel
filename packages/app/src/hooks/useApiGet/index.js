@@ -10,7 +10,7 @@ export const useApiGet = (endpoint, skip) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    if (skip) return
+    if (skip || !endpoint) return
 
     const controller = new AbortController()
     const signal = controller.signal

@@ -2,7 +2,7 @@ import { ErrorRequestHandler } from 'express'
 
 export enum EErrorType {
   MISSING_ROLES = 'Missing required roles',
-  NOT_LOGGED_IN = 'Not logged in',
+  NOT_LOGGED_IN = 'Unauthenticated',
 }
 
 export const throwError = (type: EErrorType) => {
@@ -18,14 +18,14 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
   switch (message) {
     case EErrorType.MISSING_ROLES: {
-      return res.status(401).send({ error: message })
+      return res.status(403).send({ error: message, code: 403 })
     }
     case EErrorType.NOT_LOGGED_IN: {
-      return res.status(401).send({ error: message })
+      return res.status(401).send({ error: message, code: 401 })
     }
     default: {
       console.error('unhandled error', err.stack)
-      res.status(500).send()
+      res.status(500).send({ error: 'Internal server error', code: 500 })
     }
   }
 }

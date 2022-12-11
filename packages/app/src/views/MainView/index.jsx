@@ -5,7 +5,6 @@ import { useApiGet } from '../../hooks/useApiGet'
 
 export const MainView = () => {
   const { data, loading, error } = useApiGet('posts')
-
   if (error) {
     return <p>{JSON.stringify(error.message)}</p>
   }
