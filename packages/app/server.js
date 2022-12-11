@@ -12,14 +12,13 @@ import { pick, pipe, map } from 'ramda'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line no-undef
-const { OG_ENCRYPTION_KEY, VITE_BACKEND_URL, OG_URL } = process.env
+const { OG_ENCRYPTION_KEY, VITE_BACKEND_URL, OG_URL, NODE_ENV } = process.env
 const API_BASE_URL = `${VITE_BACKEND_URL}/api/v1/`
 const POST_ID_REGEX = /^\/posts\/(?<id>[\w\d]+)/
 const OG_PARTS = ['content', 'score', 'commentCount', 'timeStamp']
 
 const createToken = async (post) => {
   const hmac = createHmac('sha256', OG_ENCRYPTION_KEY)
-  console.log(JSON.stringify(post, null, ''))
   hmac.update(JSON.stringify(post, null, ''))
   const token = hmac.digest('hex')
   return token
@@ -83,7 +82,10 @@ async function createServer() {
     const url = req.originalUrl
     try {
       let template = fs.readFileSync(
-        path.resolve(__dirname, 'index.html'),
+        path.resolve(
+          __dirname,
+          NODE_ENV === 'production' ? 'dist/client/index.html' : 'index.html'
+        ),
         'utf-8'
       )
 
