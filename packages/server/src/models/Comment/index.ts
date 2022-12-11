@@ -6,6 +6,10 @@ export const commentSchema = new Schema<IComment>({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  postId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  },
   voters: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   score: {
     type: Number,
