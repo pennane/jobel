@@ -9,7 +9,7 @@ export const useApiPost = (endpoint) => {
   const [error, setError] = useState(null)
   const [data, setData] = useState(null)
 
-  const fetchData = (data) => {
+  const postData = (data) => {
     if (loading || !endpoint) return
     setLoading(true)
 
@@ -39,5 +39,5 @@ export const useApiPost = (endpoint) => {
       .finally(() => setLoading(false))
   }
 
-  return { loading, error, data, fetchData }
+  return { loading, error, data, fetchData: postData }
 }
