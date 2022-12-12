@@ -30,7 +30,7 @@ export const PostView = () => {
           <Post {...post} />
         </div>
         <div className={classes.comment}>
-          {post.comments && post.comments.map((comment, i) => <Post key={i} isComment={true} {...comment} />)}
+          {post.comments && post.comments.map((comment, i) => <Post key={i} isComment={true} {...comment} color={post.color} />)}
         </div>
       </div>
     </div>
