@@ -24,6 +24,7 @@
 .post main {
   min-height: 100px;
   margin-bottom: 1rem;
+  overflow-wrap: anywhere;
 }
 .post aside {
   display: flex;
