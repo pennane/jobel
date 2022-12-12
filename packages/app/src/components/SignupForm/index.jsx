@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { path, concat } from 'ramda'
+import classes from '../../views/SettingsView/style.module.css'
 
 const createSignupFormId = concat("signup-")
 const USERNAME_ID = createSignupFormId("username")
@@ -22,14 +23,14 @@ export const SignupForm = () => {
     setLoading(false)
   }
 
-  return (<div>
+  return (<div className={classes.signupForm}>
     {isLoggedIn && "logged in as " + user.userName}
     {!isLoggedIn &&
       <form onSubmit={handleSignup}>
         <h3>Sign up</h3>
         <div><label htmlFor="signup-username">Username:</label><input id={USERNAME_ID} type="text" /></div>
-        <div><label htmlFor="signup-password">Password:</label><input id={PASSWORD_ID} type="password" /></div>
-        <input type="submit" value="send" disabled={loading} />
+        <div><label htmlFor="signup-password">Password: </label><input id={PASSWORD_ID} type="password" /></div>
+        <input type="submit" value="Sign up" disabled={loading} />
       </form>
     }
 
