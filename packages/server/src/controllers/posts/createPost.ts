@@ -6,9 +6,10 @@ import { IPost } from '../../models/Post/types'
 let lastColor = 0
 
 const MINIMUM_POST_CONTENT_LENGTH = 2
+const MAXIMUM_POST_CONTENT_LENGTH = 250
 
 const isValidContent = (s?: string) =>
-  !s || typeof s !== 'string' || s.length < MINIMUM_POST_CONTENT_LENGTH
+  !s || typeof s !== 'string' || s.length < MINIMUM_POST_CONTENT_LENGTH || s.length > MAXIMUM_POST_CONTENT_LENGTH
 
 const randomInteger = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
