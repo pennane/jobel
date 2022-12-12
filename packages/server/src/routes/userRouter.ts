@@ -9,6 +9,6 @@ const userRouter = Router()
 
 userRouter.get('/users/me', [roleAuth([ERole.User])], getMe)
 userRouter.get('/users/deleteall', [roleAuth([ERole.Admin])], deleteAll)
-userRouter.get('/users/:id', [roleAuth([ERole.User])], getById)
+userRouter.get('/users/:id', [roleAuth([ERole.Admin])], getById)
 
 export default userRouter

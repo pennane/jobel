@@ -1,10 +1,10 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import classes from './style.module.css'
-import {  useAuthContext} from '../../hooks/useAuthContext';
+// import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 export const RootLayout = () => {
-const {user, isLoggedIn} = useAuthContext()
+  // const { user, isLoggedIn } = useAuthContext()
   return (
     <div className={classes.rootLayout}>
       <nav className={classes.nav}>
@@ -14,14 +14,14 @@ const {user, isLoggedIn} = useAuthContext()
             <header>JOBEL</header>
           </div>
         </NavLink>
-      <div className={classes.rightSide}>
-      <div>
-        {isLoggedIn && <div>logged in as {user.userName}</div>}
+        <div className={classes.rightSide}>
+          <div>
+            {/* {isLoggedIn && <div>logged in as {user.userName}</div>} */}
+          </div>
+          <NavLink to="/settings">
+            <div className={classes.navLink}>⚙️</div>
+          </NavLink>
         </div>
-        <NavLink to="/settings">
-          <div className={classes.navLink}>⚙️</div>
-        </NavLink>
-      </div>
       </nav>
       <main>
         <Outlet />

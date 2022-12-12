@@ -8,6 +8,9 @@ import { MainView } from './views/MainView'
 import { NotFound } from './views/NotFound'
 import { SettingsView } from './views/SettingsView'
 import { AuthContextProvider } from './context/AuthContext'
+import { QueryClientProvider, QueryClient } from 'react-query'
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -33,8 +36,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthContextProvider>
+
+        <RouterProvider router={router} />
+
+      </AuthContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 )

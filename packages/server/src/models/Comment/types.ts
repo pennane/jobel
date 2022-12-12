@@ -7,4 +7,5 @@ export interface IComment extends Document {
   score: number
   content: string
   timeStamp: Date
+  visibleUserId: number
 }

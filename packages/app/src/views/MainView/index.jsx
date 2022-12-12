@@ -1,27 +1,46 @@
 import { Post } from '../../components/Post'
 import classes from './style.module.css'
-import { useApiGet } from '../../hooks/useApiGet'
+import { useInfiniteQuery } from 'react-query'
+import { getMorePosts } from '../../lib'
+
+import { useState } from 'react'
+
+import { useIsOnScreen } from '../../hooks/useIsOnScreen'
 
 
 export const MainView = () => {
-  const { data, loading, error } = useApiGet('posts')
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  } = useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: getMorePosts,
+    getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.lastTimeStamp : null,
+  })
 
-  if (error) {
-    return <p>{JSON.stringify(error.message)}</p>
+  const pages = data?.pages
+
+  const [ref, setRef] = useState(null)
+  const isLastPageOnScreen = useIsOnScreen(ref)
+
+  if (isLastPageOnScreen && hasNextPage && !isFetching) {
+    fetchNextPage()
   }
-
-  if (loading) {
-    return null
-  }
-
-  const posts = data?.posts || []
 
   return (
-    <div className={classes.mainView}>
-      <div className={classes.postsWrapper}>
-        {posts.length === 0 && <p>Ei vielä joblauksia</p>}
-        {posts.length > 0 && posts.map((post, i) => <Post key={i} {...post} withLink={true} />)}
+    <div>
+      <div className={classes.mainView}>
+        {pages?.length > 0 && pages.map((page, i) => (
+          <div className={classes.postsWrapper} key={page.lastTimeStamp} ref={i === pages.length - 1 ? setRef : null}>
+            {page.posts.length === 0 && <p>Ei enempää joblauksia</p>}
+            {page.posts.length > 0 && page.posts.map((post) => <Post key={post._id + post.timeStamp}  {...post} withLink={true} hideVisibleUserId={true} />)}
+          </div>
+        ))}
       </div>
     </div>
   )
+
+
 }
