@@ -11,14 +11,21 @@ const MAXIMUM_PASSWORD_LENGTH = 30
 export const signUp: RequestHandler = async (req, res) => {
   const { userName, password } = req.body
 
-  if (!userName || typeof userName !== 'string' || userName.length > MAXIMUM_USERNAME_LENGTH) {
+  if (
+    !userName ||
+    typeof userName !== 'string' ||
+    userName.length > MAXIMUM_USERNAME_LENGTH
+  ) {
     return res.status(400).send({ error: 'userName missing or it is too long' })
   }
 
-  if (!password || typeof password !== 'string' || password.length > MAXIMUM_PASSWORD_LENGTH) {
+  if (
+    !password ||
+    typeof password !== 'string' ||
+    password.length > MAXIMUM_PASSWORD_LENGTH
+  ) {
     return res.status(400).send({ error: 'password missing or it is too long' })
   }
-  // TODO: Validate password and username requirements
 
   const userWithSameUserName = await User.findOne(
     {

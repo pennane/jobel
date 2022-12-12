@@ -10,4 +10,5 @@ export interface IPost {
   color: number
   comments: IComment[]
   commentCount: number
+  userIds: ObjectId[]
 }

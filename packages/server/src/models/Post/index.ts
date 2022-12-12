@@ -25,6 +25,7 @@ export const postSchema = new Schema<IPost>({
     default: 0,
   },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  userIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 })
 
 postSchema.set('toJSON', {
@@ -35,7 +36,7 @@ postSchema.set('toJSON', {
 })
 
 postSchema.virtual('commentCount').get(function () {
-  return this.comments.length
+  return this.comments?.length > 0 ? this.comments.length : 0
 })
 
 export const Post = model<IPost>('Post', postSchema)
