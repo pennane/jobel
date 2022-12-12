@@ -15,6 +15,7 @@ export const getPostById: RequestHandler = async (req, res) => {
     comments: 1,
     score: 1,
     content: 1,
+    visibleUserId: 1,
   })
     .populate('comments', '_id visibleUserId timeStamp content score')
     .exec()

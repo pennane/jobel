@@ -32,7 +32,9 @@ const Vote = ({ score }) => {
   </div>
 }
 
-export const Post = ({ timeStamp, _id, commentCount, isComment, score, content, withLink, color }) => {
+const parseVisibleUserId = (id) => id === 0 ? 'oj' : id
+
+export const Post = ({ timeStamp, _id, commentCount, isComment, score, content, withLink, color, visibleUserId, hideVisibleUserId }) => {
   const navigate = useNavigate()
   const handleOpenPostView = () => withLink && navigate(`/posts/${_id}`)
 
@@ -47,7 +49,7 @@ export const Post = ({ timeStamp, _id, commentCount, isComment, score, content, 
 
   return (
     <div className={classes.post} id={_id} style={{ backgroundColor: colors[color] }} onClick={handleOpenPostView}>
-      <header onClick={handleOpenPostView}>{getIntlTimeAgo(timeStamp)}</header>
+      <header>{!hideVisibleUserId && `@${parseVisibleUserId(visibleUserId)}`} {getIntlTimeAgo(timeStamp)}</header>
       <section>
         <main>
           {content}

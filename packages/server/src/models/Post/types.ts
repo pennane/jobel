@@ -11,4 +11,5 @@ export interface IPost {
   comments: IComment[]
   commentCount: number
   userIds: ObjectId[]
+  visibleUserId: 0
 }

@@ -26,6 +26,10 @@ export const postSchema = new Schema<IPost>({
   },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   userIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  visibleUserId: {
+    type: Number,
+    default: 0,
+  },
 })
 
 postSchema.set('toJSON', {

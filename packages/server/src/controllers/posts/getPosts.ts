@@ -16,6 +16,7 @@ const FIELDS = {
   content: 1,
   color: 1,
   score: 1,
+  comments: 1,
   commentCount: 1,
 }
 
@@ -48,5 +49,9 @@ export const getPosts: RequestHandler = async (req, res) => {
   const hasMore = await getHasMore(posts)
   const lastTimeStamp = last(posts)?.timeStamp || null
 
-  res.send({ posts: posts || [], hasMore, lastTimeStamp })
+  res.send({
+    posts: posts || [],
+    hasMore,
+    lastTimeStamp,
+  })
 }

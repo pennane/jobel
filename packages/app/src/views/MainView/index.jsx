@@ -20,7 +20,7 @@ export const MainView = () => {
     <div className={classes.mainView}>
       <div className={classes.postsWrapper}>
         {posts.length === 0 && <p>Ei vielä joblauksia</p>}
-        {posts.length > 0 && posts.map((post, i) => <Post key={i} {...post} withLink={true} />)}
+        {posts.length > 0 && posts.map((post, i) => <Post key={i} {...post} withLink={true} hideVisibleUserId={true} />)}
       </div>
     </div>
   )
