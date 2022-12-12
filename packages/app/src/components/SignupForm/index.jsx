@@ -28,8 +28,8 @@ export const SignupForm = () => {
     {!isLoggedIn &&
       <form onSubmit={handleSignup}>
         <h3>Sign up</h3>
-        <div><label htmlFor="signup-username">Username:</label><input id={USERNAME_ID} type="text" /></div>
-        <div><label htmlFor="signup-password">Password: </label><input id={PASSWORD_ID} type="password" /></div>
+        <div><label htmlFor="signup-username">Username:</label><input id={USERNAME_ID} type="text" maxLength={24} /></div>
+        <div><label htmlFor="signup-password">Password: </label><input id={PASSWORD_ID} type="password" maxLength={30} /></div>
         <input type="submit" value="Sign up" disabled={loading} />
       </form>
     }

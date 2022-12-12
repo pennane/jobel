@@ -29,8 +29,8 @@ export const LoginForm = () => {
     {!isLoggedIn &&
       <form onSubmit={handleLogin}>
         <h3>Log in</h3>
-        <div><label htmlFor="login-username">Username:</label><input id={USERNAME_ID} type="text" /></div>
-        <div><label htmlFor="login-password">Password: </label><input id={PASSWORD_ID} type="password" /></div>
+        <div><label htmlFor="login-username">Username:</label><input id={USERNAME_ID} type="text" maxLength={24} /></div>
+        <div><label htmlFor="login-password">Password: </label><input id={PASSWORD_ID} type="password" maxLength={30} /></div>
         <input type="submit" value="Log in" disabled={loading} />
       </form>
     }
