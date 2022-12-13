@@ -2,6 +2,7 @@ import { Post } from '../../components/Post'
 import classes from './style.module.css'
 import { useInfiniteQuery } from 'react-query'
 import { getMorePosts } from '../../lib'
+import { NewPostButton } from '../../components/NewPostButton'
 
 import { useState } from 'react'
 
@@ -35,6 +36,7 @@ export const MainView = () => {
         {pages?.length > 0 && pages.map((page, i) => (
           <div className={classes.postsWrapper} key={page.lastTimeStamp} ref={i === pages.length - 1 ? setRef : null}>
             {page.posts.length === 0 && <p>Ei enempää joblauksia</p>}
+            <NewPostButton></NewPostButton>
             {page.posts.length > 0 && page.posts.map((post) => <Post key={post._id + post.timeStamp}  {...post} withLink={true} hideVisibleUserId={true} />)}
           </div>
         ))}
