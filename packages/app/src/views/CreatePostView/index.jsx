@@ -12,8 +12,7 @@ export const CreatePostView = () => {
     const color = useMemo(() => randomInteger(0, COLORS.length - 1), [])
 
     const navigate = useNavigate()
-    const toFrontPage = (e) => {
-        e.preventDefault()
+    const toFrontPage = () => {
         navigate('/')
     }
     const handleBack = (e) => {
