@@ -10,7 +10,7 @@ export const PostView = () => {
   const { token } = useAuthContext()
   const getPostWithToken = getPost(token)
 
-  const { data, isFetching, error, isError } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: [id],
     queryFn: () => getPostWithToken(id),
     staleTime: 1000 * 60 * 5, // 5 minutes
