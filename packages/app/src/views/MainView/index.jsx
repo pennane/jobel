@@ -3,10 +3,9 @@ import classes from './style.module.css'
 import { useInfiniteQuery } from 'react-query'
 import { getMorePosts } from '../../lib'
 import { NewPostButton } from '../../components/NewPostButton'
-
 import { useState } from 'react'
-
 import { useIsOnScreen } from '../../hooks/useIsOnScreen'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 
 export const MainView = () => {
@@ -22,6 +21,8 @@ export const MainView = () => {
     staleTime: 1000 * 10 // 10 seconds
   })
 
+  const { isLoggedIn } = useAuthContext()
+
   const pages = data?.pages
 
   const [ref, setRef] = useState(null)
@@ -33,11 +34,10 @@ export const MainView = () => {
 
   return (
     <div>
-      <NewPostButton />
+      {isLoggedIn && <NewPostButton />}
       <div className={classes.mainView}>
         {pages?.length > 0 && pages.map((page, i) => (
           <div className={classes.postsWrapper} key={page.lastTimeStamp} ref={i === pages.length - 1 ? setRef : null}>
-
             {page.posts.length > 0 && page.posts.map((post) => <Post key={post._id + post.timeStamp}  {...post} withLink={true} hideVisibleUserId={true} />)}
           </div>
         ))}
