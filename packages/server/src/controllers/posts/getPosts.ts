@@ -37,19 +37,13 @@ const getHasMore = async (posts: IPost[]) => {
 export const getPosts: RequestHandler = async (req, res) => {
   const olderThan = parseDate(req.query.olderThan)
 
-  let posts
-
-  if (olderThan) {
-    posts = await Post.find({ timeStamp: { $lt: olderThan } }, FIELDS)
-      .limit(MAX_POSTS_PER_REQUEST)
-      .sort('-timeStamp')
-      .exec()
-  } else {
-    posts = await Post.find({}, FIELDS)
-      .limit(MAX_POSTS_PER_REQUEST)
-      .sort('-timeStamp')
-      .exec()
-  }
+  const posts = await Post.find(
+    olderThan ? { timeStamp: { $lt: olderThan } } : {},
+    FIELDS
+  )
+    .limit(MAX_POSTS_PER_REQUEST)
+    .sort('-timeStamp')
+    .exec()
 
   const hasMore = await getHasMore(posts)
   const lastTimeStamp = last(posts)?.timeStamp || null
