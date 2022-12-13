@@ -1,39 +1,20 @@
 import { RequestHandler } from 'express'
 import { ObjectId } from 'mongoose'
 import {
-  addIndex,
-  always,
-  concat,
-  construct,
-  descend,
-  find,
-  identity,
-  ifElse,
-  invoker,
-  isNil,
-  length,
-  map,
   path,
   pick,
-  pipe,
-  pluck,
-  prop,
-  propEq,
-  sortBy,
-  sortWith,
-  uniq,
 } from 'ramda'
 import { EErrorType, throwError } from '../../middleware/errorHandler'
 import { Comment } from '../../models/Comment/'
-import { IComment } from '../../models/Comment/types'
 import { Post } from '../../models/Post'
 import { IPost } from '../../models/Post/types'
 import { User } from '../../models/User'
 
-const MINIMUM_Comment_CONTENT_LENGTH = 2
+const MINIMUM_COMMENT_CONTENT_LENGTH = 2
+const MAXIMUM_COMMENT_CONTENT_LENGTH = 250
 
 const isValidContent = (s?: string) =>
-  !s || typeof s !== 'string' || s.length < MINIMUM_Comment_CONTENT_LENGTH
+  !s || typeof s !== 'string' || s.length < MINIMUM_COMMENT_CONTENT_LENGTH ||  s.length > MAXIMUM_COMMENT_CONTENT_LENGTH
 
 const getPostId = path(['params', 'postId'])
 

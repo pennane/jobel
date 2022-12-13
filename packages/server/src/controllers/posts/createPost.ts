@@ -2,8 +2,6 @@ import { RequestHandler } from 'express'
 import { path, pick } from 'ramda'
 import { EErrorType, throwError } from '../../middleware/errorHandler'
 import { Post } from '../../models/Post/'
-import { IPost } from '../../models/Post/types'
-
 let lastColor = 0
 
 const MINIMUM_POST_CONTENT_LENGTH = 2
