@@ -4,7 +4,6 @@
 
 .post {
   padding: 1rem;
-  background-color: #02123c;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

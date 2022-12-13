@@ -38,17 +38,8 @@ export const Post = ({ timeStamp, _id, commentCount, isComment, score, content, 
   const navigate = useNavigate()
   const handleOpenPostView = () => withLink && navigate(`/posts/${_id}`)
 
-  const colors = [
-    "#800f3f",
-    "#0f8022",
-    "#b24822",
-    "#5d23b2",
-    "#242ab2"
-  ]
-
-
   return (
-    <div className={classes.post} id={_id} style={{ backgroundColor: colors[color] }} onClick={handleOpenPostView}>
+    <div className={`${classes.post} background-color${color}`} id={_id} onClick={handleOpenPostView} style={withLink ? { cursor: 'pointer' } : {}}>
       <header>{!hideVisibleUserId && `@${parseVisibleUserId(visibleUserId)}`} {getIntlTimeAgo(timeStamp)}</header>
       <section>
         <main>
