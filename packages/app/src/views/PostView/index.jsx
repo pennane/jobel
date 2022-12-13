@@ -16,7 +16,6 @@ export const PostView = () => {
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: false
   })
-  console.log(error, isError);
 
   if (error) {
     return <p>{JSON.stringify(error)}</p>
