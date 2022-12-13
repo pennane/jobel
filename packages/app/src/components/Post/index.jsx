@@ -57,7 +57,7 @@ export const Post = ({
         </header>
         <main className={classes.main}>{content}</main>
         {!isComment && (
-          <footer className={classes.footer}>{commentCount} kommentit</footer>
+          <footer className={classes.footer}>{commentCount} kommenttia</footer>
         )}
       </section>
       <aside className={classes.aside}>
