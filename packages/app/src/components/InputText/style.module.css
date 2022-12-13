@@ -1,0 +1,10 @@
+input.input[type='text'],
+input.input[type='password'] {
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 0.25rem;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}

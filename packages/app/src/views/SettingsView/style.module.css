@@ -1,27 +1,17 @@
 .mainView {
   display: flex;
   flex-direction: column;
-}
-
-.loginForm {
-  background-color: #4417c0;
+  gap: 2rem;
+  border-radius: 0.5rem;
   padding: 3rem;
   text-align: center;
 }
-.signupForm div,
-.loginForm div {
+.mainView form div {
   display: flex;
   justify-content: space-between;
   gap: 0.25rem;
 }
 
-.loginForm div > label,
-.signupForm div > label {
+.mainView form div > label {
   font-weight: 500;
-}
-
-.signupForm {
-  padding: 3rem;
-  background-color: #310f80;
-  text-align: center;
 }
