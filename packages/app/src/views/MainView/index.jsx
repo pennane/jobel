@@ -19,6 +19,7 @@ export const MainView = () => {
     queryKey: ['posts'],
     queryFn: getMorePosts,
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.lastTimeStamp : null,
+    staleTime: 1000 * 10 // 10 seconds
   })
 
   const pages = data?.pages
