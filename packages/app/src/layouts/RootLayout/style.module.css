@@ -3,6 +3,17 @@
   flex-direction: column;
 }
 
+.rootLayout > main {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.rootLayout > main > div {
+  width: 550px;
+  max-width: 100%;
+}
+
 .nav {
   display: flex;
   gap: 1rem;

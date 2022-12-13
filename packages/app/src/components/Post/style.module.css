@@ -5,40 +5,39 @@
 .post {
   padding: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: var(--small-box-shadow);
   color: var(--text-color);
+  min-height: 200px;
 }
 
-.post > header {
-}
-
-.post > section {
+.header {
   display: flex;
-  gap: 2rem;
-  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 30px;
 }
-.post main {
+
+.section {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.main {
   min-height: 100px;
   margin-bottom: 1rem;
   overflow-wrap: anywhere;
 }
-.post aside {
+.aside {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.post > footer {
-}
-
-.vote {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 1rem;
+.footer {
+  font-weight: 300;
 }

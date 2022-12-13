@@ -1,14 +1,10 @@
 .mainView {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.5rem;
-  margin: 2rem;
 }
 
 .postsWrapper {
-  max-width: 550px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

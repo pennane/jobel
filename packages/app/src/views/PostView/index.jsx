@@ -35,13 +35,11 @@ export const PostView = () => {
 
   return (
     <div className={classes.mainView}>
+      <div className={classes.originalPost}>
+        <Post {...post} />
+      </div>
       <div className={classes.postWrapper}>
-        <div className={classes.originalPost}>
-          <Post {...post} />
-        </div>
-        <div className={classes.comment}>
-          {post.comments && post.comments.map((comment, i) => <Post key={i} isComment={true} {...comment} color={post.color} />)}
-        </div>
+        {post.comments && post.comments.map((comment, i) => <Post key={i} isComment={true} {...comment} color={post.color} />)}
       </div>
     </div>
   )
