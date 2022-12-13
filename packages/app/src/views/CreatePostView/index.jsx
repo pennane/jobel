@@ -14,6 +14,7 @@ export const CreatePostView = () => {
     const handleBack = () => navigate(-1)
 
     const { token } = useAuthContext()
+    const { isLoggedIn } = useAuthContext()
 
     const createPostWithToken = createPost(token)
 
@@ -38,23 +39,43 @@ export const CreatePostView = () => {
 
     return (
         <div className={classes.createPostView} style={{ ['--secondary-color']: `var(--secondary-color${color})` }}>
-            {error && <p>{JSON.stringify(error)}</p>}
-            <div className={classes.formWrapper}>
-                <form onSubmit={handleSubmit}>
-                    <div className={classes.ylaosa}>
-                        <button className={classes.nappi} onClick={handleBack}>Takaisin</button>
-                        <input className={classes.nappi} type='submit' value='Postaa'></input>
-                    </div>
-                    <div className={classes.postfield}>
-                        <textarea
-                            id="post-content"
-                            className={classes.post}
-                            maxLength={250}
-                            placeholder='Jaa ajatuksesi ja kokemuksesi muilla joblaajille!'>
-                        </textarea>
-                    </div>
-                </form>
-            </div>
+            {isLoggedIn ? <>
+                {error && <p>{JSON.stringify(error)}</p>}
+                <div className={classes.formWrapper}>
+                    <form onSubmit={handleSubmit}>
+                        <div className={classes.ylaosa}>
+                            <button className={classes.nappi} onClick={handleBack}>Takaisin</button>
+                            <input className={classes.nappi} type='submit' value='Postaa'></input>
+                        </div>
+                        <div className={classes.postfield}>
+                            <textarea
+                                id="post-content"
+                                className={classes.post}
+                                maxLength={250}
+                                placeholder='Jaa ajatuksesi ja kokemuksesi muille joblaajille!'>
+                            </textarea>
+                        </div>
+                    </form>
+                </div>
+            </> : <>
+                {error && <p>{JSON.stringify(error)}</p>}
+                <div className={classes.formWrapper}>
+                    <form onSubmit={handleSubmit}>
+                        <div className={classes.ylaosa}>
+                            <button className={classes.nappi} onClick={handleBack}>Takaisin</button>
+                            <input className={classes.nappi} type='submit' value='Postaa' disabled></input>
+                        </div>
+                        <div className={classes.postfield}>
+                            <textarea
+                                id="post-content"
+                                className={classes.post}
+                                maxLength={250}
+                                placeholder='Nyt seikkailet väärillä sivuilla, vain käyttäjillä on oikeus tänne. Kirjaudu sisään tai rekisteröidy päästäksesi käsiksi postaamiseen'
+                                disabled>
+                            </textarea>
+                        </div>
+                    </form>
+                </div></>}
         </div>
     )
 }
