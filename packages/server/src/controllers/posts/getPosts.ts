@@ -20,6 +20,8 @@ const FIELDS = {
   commentCount: 1,
 }
 
+const MAX_POSTS_PER_REQUEST = 5
+
 const getHasMore = async (posts: IPost[]) => {
   const lastPost = last(posts)
   if (!lastPost) return false
@@ -39,11 +41,14 @@ export const getPosts: RequestHandler = async (req, res) => {
 
   if (olderThan) {
     posts = await Post.find({ timeStamp: { $lt: olderThan } }, FIELDS)
-      .limit(10)
+      .limit(MAX_POSTS_PER_REQUEST)
       .sort('-timeStamp')
       .exec()
   } else {
-    posts = await Post.find({}, FIELDS).limit(10).sort('-timeStamp').exec()
+    posts = await Post.find({}, FIELDS)
+      .limit(MAX_POSTS_PER_REQUEST)
+      .sort('-timeStamp')
+      .exec()
   }
 
   const hasMore = await getHasMore(posts)
