@@ -1,0 +1,28 @@
+.vote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.arrow {
+  opacity: 0.5;
+}
+
+.arrow[data-active] {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.number {
+  font-weight: 500;
+  opacity: 0.5;
+}
+
+.number[data-active] {
+  opacity: 1;
+}

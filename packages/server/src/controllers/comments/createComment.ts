@@ -44,7 +44,7 @@ const getVisibleUserId = (post: IPost, userId: ObjectId) => {
 }
 
 export const createComment: RequestHandler = async (req, res) => {
-  const { content } = req.body as Partial<IComment>
+  const content = path<string>(['body', 'content'], req)
   const userId = req.tokenPayload?._id
   const postId = getPostId(req)
 

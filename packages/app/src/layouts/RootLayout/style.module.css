@@ -3,6 +3,17 @@
   flex-direction: column;
 }
 
+.rootLayout > main {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.rootLayout > main > div {
+  width: 550px;
+  max-width: 100%;
+}
+
 .nav {
   display: flex;
   gap: 1rem;
@@ -48,15 +59,4 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-}
-
-.createPostLink a{
-  cursor: pointer;
-  position: fixed;
-  font-size: 3.5rem;
-  display: flex;
-  opacity: 0.7;
-  left: 47.5%;
-  top: 85%;
-  text-decoration: none;
 }

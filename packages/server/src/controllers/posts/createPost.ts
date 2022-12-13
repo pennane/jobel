@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { pick } from 'ramda'
+import { path, pick } from 'ramda'
 import { EErrorType, throwError } from '../../middleware/errorHandler'
 import { Post } from '../../models/Post/'
 import { IPost } from '../../models/Post/types'
@@ -31,7 +31,7 @@ const randomNewInteger = (old: number, min: number, max: number) => {
 const COLORS = ['#800f3f', '#0f8022', '#b24822', '#5d23b2', '#242ab2']
 
 export const createPost: RequestHandler = async (req, res) => {
-  const { content } = req.body as Partial<IPost>
+  const content = path<string>(['body', 'content'], req)
   const userId = req.tokenPayload?._id
 
   if (!userId || typeof userId !== 'string') {

@@ -11,3 +11,5 @@ export const EXAMPLE_POST = {
   timeStamp: '2022-12-11T14:52:48.016Z',
   commentCount: 0,
 }
+
+export const COLORS = ['#800f3f', '#0f8022', '#b24822', '#5d23b2', '#242ab2']

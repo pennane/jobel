@@ -19,6 +19,7 @@ export const MainView = () => {
     queryKey: ['posts'],
     queryFn: getMorePosts,
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.lastTimeStamp : null,
+    staleTime: 1000 * 10 // 10 seconds
   })
 
   const pages = data?.pages
@@ -32,14 +33,15 @@ export const MainView = () => {
 
   return (
     <div>
+      <NewPostButton />
       <div className={classes.mainView}>
         {pages?.length > 0 && pages.map((page, i) => (
           <div className={classes.postsWrapper} key={page.lastTimeStamp} ref={i === pages.length - 1 ? setRef : null}>
-            {page.posts.length === 0 && <p>Ei enempää joblauksia</p>}
-            <NewPostButton></NewPostButton>
+
             {page.posts.length > 0 && page.posts.map((post) => <Post key={post._id + post.timeStamp}  {...post} withLink={true} hideVisibleUserId={true} />)}
           </div>
         ))}
+        {!hasNextPage && <p>Ei enempää joblauksia :D</p>}
       </div>
     </div>
   )

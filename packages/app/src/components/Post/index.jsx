@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import classes from './style.module.css'
+import { Vote } from './components/Vote';
+import { UserTag } from './components/UserTag';
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const getIntlTimeAgo = (input) => {
   const date = (input instanceof Date) ? input : new Date(input);
@@ -24,41 +27,24 @@ const getIntlTimeAgo = (input) => {
   }
 }
 
-const Vote = ({ score }) => {
-  return <div className={classes.vote}>
-    <div>&uarr;</div>
-    <div>{score}</div>
-    <div>&darr;</div>
-  </div>
-}
-
-const parseVisibleUserId = (id) => id === 0 ? 'oj' : id
 
 export const Post = ({ timeStamp, _id, commentCount, isComment, score, content, withLink, color, visibleUserId, hideVisibleUserId }) => {
   const navigate = useNavigate()
+  const { isLoggedIn } = useAuthContext()
   const handleOpenPostView = () => withLink && navigate(`/posts/${_id}`)
 
-  const colors = [
-    "#800f3f",
-    "#0f8022",
-    "#b24822",
-    "#5d23b2",
-    "#242ab2"
-  ]
-
-
   return (
-    <div className={classes.post} id={_id} style={{ backgroundColor: colors[color] }} onClick={handleOpenPostView}>
-      <header>{!hideVisibleUserId && `@${parseVisibleUserId(visibleUserId)}`} {getIntlTimeAgo(timeStamp)}</header>
-      <section>
-        <main>
+    <div className={`${classes.post} background-color${color}`} id={_id} onClick={handleOpenPostView} style={withLink ? { cursor: 'pointer' } : {}}>
+      <section className={classes.section}>
+        <header className={classes.header}>{!hideVisibleUserId && <UserTag visibleUserId={visibleUserId} />} {getIntlTimeAgo(timeStamp)}</header>
+        <main className={classes.main}>
           {content}
         </main>
-        <aside>
-          <Vote score={score} />
-        </aside>
+        {!isComment && <footer className={classes.footer}>{commentCount} comments</footer>}
       </section>
-      {!isComment && <footer>{commentCount} comments</footer>}
+      <aside className={classes.aside}>
+        <Vote score={score} isLoggedIn={isLoggedIn} />
+      </aside>
     </div>
   )
 }

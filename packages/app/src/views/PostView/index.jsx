@@ -1,18 +1,28 @@
 import classes from './style.module.css'
 import { Post } from '../../components/Post'
-import { useApiGet } from '../../hooks/useApiGet'
 import { useParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import { getPost } from '../../lib'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 export const PostView = () => {
   const { id } = useParams()
+  const { token } = useAuthContext()
+  const getPostWithToken = getPost(token)
 
-  const { data, loading, error } = useApiGet(`posts/${id}`, !id)
+  const { data, isFetching, error, isError } = useQuery({
+    queryKey: [id],
+    queryFn: () => getPostWithToken(id),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: false
+  })
+  console.log(error, isError);
 
   if (error) {
-    return <p>{JSON.stringify(error.message)}</p>
+    return <p>{JSON.stringify(error)}</p>
   }
 
-  if (loading || !data) {
+  if (isFetching || !data) {
     return null
   }
 
@@ -25,13 +35,11 @@ export const PostView = () => {
 
   return (
     <div className={classes.mainView}>
+      <div className={classes.originalPost}>
+        <Post {...post} />
+      </div>
       <div className={classes.postWrapper}>
-        <div className={classes.originalPost}>
-          <Post {...post} />
-        </div>
-        <div className={classes.comment}>
-          {post.comments && post.comments.map((comment, i) => <Post key={i} isComment={true} {...comment} color={post.color} />)}
-        </div>
+        {post.comments && post.comments.map((comment, i) => <Post key={i} isComment={true} {...comment} color={post.color} />)}
       </div>
     </div>
   )
