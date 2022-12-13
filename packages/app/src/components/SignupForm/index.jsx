@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { path, concat } from 'ramda'
 import classes from '../../views/SettingsView/style.module.css'
+import { InputButton } from '../InputButton';
+import { Form } from '../Form';
+import { InputText } from '../InputText';
 
 const createSignupFormId = concat('signup-')
 const USERNAME_ID = createSignupFormId('username')
@@ -22,23 +25,16 @@ export const SignupForm = () => {
     setLoading(false)
   }
 
-  return (
-    <div className={classes.signupForm}>
-      {isLoggedIn && 'kirjautuneena ' + user.userName}
-      {!isLoggedIn && (
-        <form onSubmit={handleSignup}>
-          <h3>Luo Käyttäjätili</h3>
-          <div>
-            <label htmlFor="signup-username">Käyttäjätunnus:</label>
-            <input id={USERNAME_ID} type="text" maxLength={24} />
-          </div>
-          <div>
-            <label htmlFor="signup-password">Salasana: </label>
-            <input id={PASSWORD_ID} type="password" maxLength={30} />
-          </div>
-          <input type="submit" value="Luo käyttäjätili" disabled={loading} />
-        </form>
-      )}
-    </div>
-  )
+  return (<div className={classes.signupForm}>
+    {isLoggedIn && "kirjautuneena " + user.userName}
+    {!isLoggedIn &&
+      <Form onSubmit={handleSignup}>
+        <div><label htmlFor="signup-username">Käyttäjätunnus:</label><InputText id={USERNAME_ID} maxLength={24} /></div>
+        <div><label htmlFor="signup-password">Salasana: </label><InputText autoComplete='new-password' id={PASSWORD_ID} type="password" maxLength={30} /></div>
+        <InputButton type="submit" value="Luo käyttäjätili" disabled={loading} />
+      </Form>
+    }
+
+  </div>)
+
 }

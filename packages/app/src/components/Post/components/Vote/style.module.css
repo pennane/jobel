@@ -13,7 +13,7 @@
   opacity: 0.5;
 }
 
-.arrow[data-active] {
+.arrow[data-active='true'] {
   opacity: 1;
   cursor: pointer;
 }
@@ -23,6 +23,6 @@
   opacity: 0.5;
 }
 
-.number[data-active] {
+.number[data-active='true'] {
   opacity: 1;
 }
