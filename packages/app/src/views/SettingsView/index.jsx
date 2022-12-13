@@ -6,7 +6,6 @@ import { LogoutButton } from '../../components/LogoutButton'
 import { useState } from 'react'
 
 export const SettingsView = () => {
-
   const { isLoggedIn } = useAuthContext()
   const [formVisibility, setFormVisibility] = useState(true)
 
@@ -17,11 +16,19 @@ export const SettingsView = () => {
   return (
     <div className={classes.mainView}>
       {isLoggedIn && <LogoutButton />}
-      {!isLoggedIn && (
-        (formVisibility ?
-          <><LoginForm className={classes.loginForm} /> <button onClick={toggleSignup}>Sign up</button></>
-          : <> <SignupForm className={classes.signupForm} /> <button onClick={toggleSignup}>Log in</button></>)
-      )}
+      {!isLoggedIn &&
+        (formVisibility ? (
+          <>
+            <LoginForm className={classes.loginForm} />{' '}
+            <button onClick={toggleSignup}>Luo käyttäjätili</button>
+          </>
+        ) : (
+          <>
+            {' '}
+            <SignupForm className={classes.signupForm} />{' '}
+            <button onClick={toggleSignup}>Kirjaudu sisään</button>
+          </>
+        ))}
     </div>
   )
 }
