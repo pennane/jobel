@@ -15,7 +15,7 @@ export const RootLayout = () => {
         </NavLink>
         <div className={classes.rightSide}>
           <div>
-            {isLoggedIn && <div>sisäänkirjautuneena {user.userName}</div>}
+            {isLoggedIn && <div>Kirjautuneena sisään: {user.userName}</div>}
           </div>
           <NavLink to="/settings">
             <div className={classes.navLink}>⚙️</div>
