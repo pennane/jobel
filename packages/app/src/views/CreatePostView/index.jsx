@@ -29,7 +29,7 @@ export const CreatePostView = () => {
                 <textarea
                 className={classes.post}
                 onChange={handlePostChange} 
-                maxLength={280}
+                maxLength={250}
                 placeholder='Jaa ajatuksesi ja kokemuksesi muilla joblaajille!'>
                 </textarea>
                 </div>
