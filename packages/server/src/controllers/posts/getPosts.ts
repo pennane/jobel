@@ -3,7 +3,7 @@ import { last } from 'ramda'
 import { Post } from '../../models/Post'
 import { IPost } from '../../models/Post/types'
 
-const parseDate = (s: unknown) => {
+const parseDate = (s: unknown): Date | null => {
   const shouldParse = !!s && (typeof s === 'string' || typeof s === 'number')
   if (!shouldParse) return null
 
