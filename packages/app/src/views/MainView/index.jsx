@@ -1,6 +1,7 @@
 import { Post } from '../../components/Post'
 import classes from './style.module.css'
 import { useApiGet } from '../../hooks/useApiGet'
+import { NewPostButton } from '../../components/NewPostButton'
 
 
 export const MainView = () => {
@@ -19,6 +20,7 @@ export const MainView = () => {
   return (
     <div className={classes.mainView}>
       <div className={classes.postsWrapper}>
+        <NewPostButton></NewPostButton>
         {posts.length === 0 && <p>Ei vielä joblauksia</p>}
         {posts.length > 0 && posts.map((post, i) => <Post key={i} {...post} withLink={true} />)}
       </div>
