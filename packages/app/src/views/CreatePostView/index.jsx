@@ -11,7 +11,10 @@ export const CreatePostView = () => {
 
     const navigate = useNavigate()
     const toFrontPage = () => navigate('/')
-    const handleBack = () => navigate(-1)
+    const handleBack = (e) => {
+        e.preventDefault()
+        navigate(-1)
+    }
 
     const { token } = useAuthContext()
     const { isLoggedIn } = useAuthContext()
