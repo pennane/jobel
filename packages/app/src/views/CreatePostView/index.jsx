@@ -51,7 +51,7 @@ export const CreatePostView = () => {
                 }}>
                     <div className={classes.ylaosa}>
                         <Button className={classes.nappi} onClick={handleBack}>Takaisin</Button>
-                        <input className={classes.nappi} type='submit' value='Postaa' dis />
+                        <input className={classes.nappi} type='submit' value='Postaa' disabled={!isLoggedIn} />
                     </div>
                     <div className={classes.postfield}>
                         <textarea
