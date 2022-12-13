@@ -9,6 +9,7 @@ import { NotFound } from './views/NotFound'
 import { SettingsView } from './views/SettingsView'
 import { AuthContextProvider } from './context/AuthContext'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import { CreatePostView } from './views/CreatePostView'
 
 const queryClient = new QueryClient()
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/settings',
         element: <SettingsView />,
+      },
+      {
+        path: '/createpost',
+        element: <CreatePostView />,
       },
     ],
   },
