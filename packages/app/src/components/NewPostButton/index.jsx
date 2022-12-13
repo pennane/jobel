@@ -4,7 +4,7 @@ import classes from '../../layouts/RootLayout/style.module.css'
 export const NewPostButton = () => {
   return (
     <div className={classes.createPostLink}>
-      <Link to="/createposts">➕</Link>
+      <Link to="/createpost">➕</Link>
     </div>
   )
 }
