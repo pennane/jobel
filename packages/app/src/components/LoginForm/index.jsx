@@ -31,7 +31,7 @@ export const LoginForm = () => {
       <Form onSubmit={handleLogin}>
         <div><label htmlFor="login-username">Käyttäjätunnus:</label><InputText id={USERNAME_ID} maxLength={24} /></div>
         <div><label htmlFor="login-password">Salasana: </label><InputText id={PASSWORD_ID} type="password" maxLength={30} /></div>
-        <InputButton type="submit" value="Log in" disabled={loading} />
+        <InputButton type="submit" value="Kirjaudu sisään" disabled={loading} />
       </Form>
     }
   </div >)
