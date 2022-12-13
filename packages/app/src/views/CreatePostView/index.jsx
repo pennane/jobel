@@ -32,6 +32,8 @@ export const CreatePostView = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = e.target["post-content"].value
+        console.log({ data });
+
         if (data.length > 250) {
             alert("Postaus voi olla maksimissaan 250 merkkiä")
             return

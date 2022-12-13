@@ -3,6 +3,18 @@ import classes from './style.module.css'
 import { Vote } from './components/Vote'
 import { UserTag } from './components/UserTag'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import React from 'react'
+
+const parseJobel = (content) => {
+  if (!content.includes(":jobel:")) return content
+
+  return (<>
+    {content.split(':jobel:').map((str, i) => <React.Fragment key={i}>
+      {i > 0 && <img className='jobel' src={'/32.png'} />}
+      <span>{str}</span>
+    </React.Fragment>)}
+  </>)
+}
 
 const getIntlTimeAgo = (input) => {
   const date = input instanceof Date ? input : new Date(input)
@@ -61,7 +73,7 @@ export const Post = ({
           {!hideVisibleUserId && <UserTag visibleUserId={visibleUserId} />}{' '}
           {getIntlTimeAgo(timeStamp)}
         </header>
-        <main className={classes.main}>{content}</main>
+        <main className={classes.main}>{parseJobel(content)}</main>
         {!isComment && (
           <footer className={classes.footer}>{parseCommentsText(commentCount)}</footer>
         )}
