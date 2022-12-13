@@ -17,6 +17,7 @@ const getIntlTimeAgo = (input) => {
     seconds: 1,
   }
 
+
   const secondsElapsed = (date.getTime() - Date.now()) / 1000
 
   for (let key in ranges) {
@@ -25,6 +26,11 @@ const getIntlTimeAgo = (input) => {
       return formatter.format(Math.round(delta), key)
     }
   }
+}
+
+const parseCommentsText = (n) => {
+  if (n === 1) return n + 'kommentti'
+  return n + ' kommenttia'
 }
 
 export const Post = ({
@@ -57,7 +63,7 @@ export const Post = ({
         </header>
         <main className={classes.main}>{content}</main>
         {!isComment && (
-          <footer className={classes.footer}>{commentCount} kommenttia</footer>
+          <footer className={classes.footer}>{parseCommentsText(commentCount)}</footer>
         )}
       </section>
       <aside className={classes.aside}>
