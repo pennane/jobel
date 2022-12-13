@@ -18,3 +18,6 @@ export const getPost = (token) => async (id) => {
     throw { error: json.error, code: res.status }
   return json
 }
+
+export const randomInteger = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min
