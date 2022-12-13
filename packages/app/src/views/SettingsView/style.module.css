@@ -8,6 +8,17 @@
   padding: 3rem;
   text-align: center;
 }
+.signupForm div,
+.loginForm div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.loginForm div > label,
+.signupForm div > label {
+  font-weight: 500;
+}
 
 .signupForm {
   padding: 3rem;
