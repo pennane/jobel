@@ -1,19 +1,18 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { path, concat } from 'ramda'
 import classes from '../../views/SettingsView/style.module.css'
 
-const createLoginFormId = concat("login-")
-const USERNAME_ID = createLoginFormId("username")
-const PASSWORD_ID = createLoginFormId("password")
+const createLoginFormId = concat('login-')
+const USERNAME_ID = createLoginFormId('username')
+const PASSWORD_ID = createLoginFormId('password')
 
 export const LoginForm = () => {
-
-  const { user, isLoggedIn, login } = useAuthContext();
+  const { user, isLoggedIn, login } = useAuthContext()
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     setLoading(true)
 
     const userName = path(['target', USERNAME_ID, 'value'], event)
@@ -21,19 +20,25 @@ export const LoginForm = () => {
 
     await login({ userName, password })
     setLoading(false)
-
   }
 
-  return (<div className={classes.loginForm}>
-    {isLoggedIn && "logged in as " + user.userName}
-    {!isLoggedIn &&
-      <form onSubmit={handleLogin}>
-        <h3>Log in</h3>
-        <div><label htmlFor="login-username">Username:</label><input id={USERNAME_ID} type="text" maxLength={24} /></div>
-        <div><label htmlFor="login-password">Password: </label><input id={PASSWORD_ID} type="password" maxLength={30} /></div>
-        <input type="submit" value="Log in" disabled={loading} />
-      </form>
-    }
-  </div >)
-
+  return (
+    <div className={classes.loginForm}>
+      {isLoggedIn && 'sisäänkirjautuneena ' + user.userName}
+      {!isLoggedIn && (
+        <form onSubmit={handleLogin}>
+          <h3>Kirjaudu sisään</h3>
+          <div>
+            <label htmlFor="login-username">Käyttäjätunnus:</label>
+            <input id={USERNAME_ID} type="text" maxLength={24} />
+          </div>
+          <div>
+            <label htmlFor="login-password">Salasana: </label>
+            <input id={PASSWORD_ID} type="password" maxLength={30} />
+          </div>
+          <input type="submit" value="Kirjaudu sisään" disabled={loading} />
+        </form>
+      )}
+    </div>
+  )
 }

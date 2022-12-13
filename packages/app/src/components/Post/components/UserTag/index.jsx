@@ -1,7 +1,6 @@
-
 import classes from './style.module.css'
 
-const parseVisibleUserId = (id) => id === 0 ? 'oj' : id
+const parseVisibleUserId = (id) => (id === 0 ? 'og' : id)
 
 export const UserTag = ({ visibleUserId }) => {
   return (
@@ -9,5 +8,4 @@ export const UserTag = ({ visibleUserId }) => {
       <span>@{parseVisibleUserId(visibleUserId)}</span>
     </div>
   )
-
 }
