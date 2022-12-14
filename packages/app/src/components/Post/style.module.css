@@ -40,4 +40,11 @@
 
 .footer {
   font-weight: 300;
+  display: flex;
+  gap: 1rem;
+}
+
+.shareButton {
+  cursor: pointer;
+  font-size: 1rem;
 }

@@ -62,6 +62,8 @@ export const Post = ({
   const { isLoggedIn } = useAuthContext()
   const handleOpenPostView = () => withLink && navigate(`/posts/${_id}`)
 
+  const handleShare = () => navigator.clipboard.writeText(`https://jobel.vercel.app/posts/${_id}`)
+
   return (
     <div
       className={`${classes.post} background-color${color}`}
@@ -76,7 +78,9 @@ export const Post = ({
         </header>
         <main className={classes.main}>{parseJobel(content)}</main>
         {!isComment && (
-          <footer className={classes.footer}>{parseCommentsText(commentCount)}</footer>
+          <footer className={classes.footer}>{parseCommentsText(commentCount)}
+          <div className={classes.shareButton} onClick={handleShare}>🔗</div>
+          </footer>
         )}
       </section>
       <aside className={classes.aside}>
