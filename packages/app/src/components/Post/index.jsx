@@ -56,6 +56,7 @@ export const Post = ({
   color,
   visibleUserId,
   hideVisibleUserId,
+  hasVoted,
 }) => {
   const navigate = useNavigate()
   const { isLoggedIn } = useAuthContext()
@@ -79,7 +80,7 @@ export const Post = ({
         )}
       </section>
       <aside className={classes.aside}>
-        <Vote score={score} isLoggedIn={isLoggedIn} />
+        <Vote score={score} isLoggedIn={isLoggedIn} hasVoted={hasVoted} _id={_id} isComment={isComment} />
       </aside>
     </div>
   )

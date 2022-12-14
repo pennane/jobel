@@ -62,9 +62,11 @@ export const getPosts: RequestHandler = async (req, res) => {
   const lastTimeStamp = last(posts)?.timeStamp || null
 
   const parsedPosts = map(
-    pipe(parseHasVoted(userId), omit(['voters'])),
+    pipe(parseHasVoted(userId), omit(['voters', 'comments'])),
     posts || []
   )
+
+  console.log(parsedPosts)
 
   res.send({
     posts: parsedPosts,

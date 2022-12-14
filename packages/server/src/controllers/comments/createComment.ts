@@ -67,9 +67,19 @@ export const createComment: RequestHandler = async (req, res) => {
     { $push: { comments: savedComment._id } }
   )
 
+  // const obu = savedComment.toObject()
+
   res.status(200).send({
     comment: pick(
-      ['_id', 'userId', 'content', 'postId', 'visibleUserId', 'timeStamp'],
+      [
+        '_id',
+        'userId',
+        'content',
+        'postId',
+        'visibleUserId',
+        'timeStamp',
+        'score',
+      ],
       savedComment
     ),
   })
