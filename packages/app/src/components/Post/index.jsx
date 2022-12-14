@@ -4,6 +4,9 @@ import { Vote } from './components/Vote'
 import { UserTag } from './components/UserTag'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import React from 'react'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Toast } from '../Toast'
 
 const parseJobel = (content) => {
   if (!content.includes(":jobel:")) return content
@@ -62,7 +65,20 @@ export const Post = ({
   const { isLoggedIn } = useAuthContext()
   const handleOpenPostView = () => withLink && navigate(`/posts/${_id}`)
 
-  const handleShare = () => navigator.clipboard.writeText(`${window.location.origin}/posts/${_id}`)
+  const handleShare = (e) => {
+    e.stopPropagation()
+    navigator.clipboard.writeText(`${window.location.origin}/posts/${_id}`)
+  
+    toast(<Toast>Kopioitu leikepöydälle! </Toast> ,{
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      theme: "dark",
+      });
+  }
 
   return (
     <div
@@ -79,6 +95,7 @@ export const Post = ({
         <main className={classes.main}>{parseJobel(content)}</main>
         {!isComment && (
           <footer className={classes.footer}>{parseCommentsText(commentCount)}
+        
           <div className={classes.shareButton} onClick={handleShare}>🔗</div>
           </footer>
         )}

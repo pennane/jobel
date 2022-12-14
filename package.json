@@ -12,5 +12,7 @@
     "packages/app",
     "packages/server"
   ],
-  "devDependencies": {}
+  "dependencies": {
+    "react-toastify": "^9.1.1"
+  }
 }

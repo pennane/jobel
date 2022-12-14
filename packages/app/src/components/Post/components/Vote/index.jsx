@@ -68,8 +68,8 @@ export const Vote = ({
         &uarr;
       </div>
       <div
-        style={hasVoted ? { color: 'red' } : {}}
-        data-active={active}
+        style={hasVoted ? { color: 'white' } : {}}
+        data-active={isLoggedIn}
         className={classes.number}
       >
         {score}
