@@ -7,13 +7,17 @@ import { useMutation } from 'react-query'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
+import { useQueryClient } from 'react-query'
 
 export const CreatePostView = () => {
     const color = useMemo(() => randomInteger(0, COLORS.length - 1), [])
 
+    const queryClient = useQueryClient()
+
     const navigate = useNavigate()
-    const toFrontPage = () => {
-        navigate('/')
+    const onSuccess = (data) => {
+        queryClient.invalidateQueries('posts')
+        navigate('/posts/' + data.post._id)
     }
     const handleBack = (e) => {
         e.preventDefault()
@@ -25,7 +29,7 @@ export const CreatePostView = () => {
 
     const createPostWithToken = createPost(token)
 
-    const { mutate, error } = useMutation({ mutationFn: createPostWithToken, onSuccess: toFrontPage })
+    const { mutate, error } = useMutation({ mutationFn: createPostWithToken, onSuccess })
 
 
 
@@ -42,6 +46,7 @@ export const CreatePostView = () => {
             return
         }
         mutate(data)
+
     }
 
 
