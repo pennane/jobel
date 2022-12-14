@@ -62,7 +62,7 @@ export const Post = ({
   const { isLoggedIn } = useAuthContext()
   const handleOpenPostView = () => withLink && navigate(`/posts/${_id}`)
 
-  const handleShare = () => navigator.clipboard.writeText(`https://jobel.vercel.app/posts/${_id}`)
+  const handleShare = () => navigator.clipboard.writeText(`${window.location.origin}/posts/${_id}`)
 
   return (
     <div
