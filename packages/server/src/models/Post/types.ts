@@ -3,7 +3,7 @@ import { IComment } from '../Comment/types'
 
 export interface IPost {
   userId: ObjectId
-  voters: string[]
+  voters: ObjectId[]
   score: number
   content: string
   timeStamp: Date

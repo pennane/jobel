@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { last } from 'ramda'
+import { last, map, omit } from 'ramda'
 import { Post } from '../../models/Post'
 import { IPost } from '../../models/Post/types'
 
@@ -48,8 +48,10 @@ export const getPosts: RequestHandler = async (req, res) => {
   const hasMore = await getHasMore(posts)
   const lastTimeStamp = last(posts)?.timeStamp || null
 
+  const postsWithoutComments = map(omit(['comments']), posts || [])
+
   res.send({
-    posts: posts || [],
+    posts: postsWithoutComments,
     hasMore,
     lastTimeStamp,
   })
