@@ -5,10 +5,13 @@ import { createComment } from '../../lib'
 import { useMutation, useQueryClient } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
+import { useVisualViewport } from '../../hooks/useVisualViewport'
 
 export const CommentingBox = () => {
   const [shown, setShown] = useState(false)
   const [content, setContent] = useState('')
+
+  const visualViewport = useVisualViewport()
 
   const queryClient = useQueryClient()
 
@@ -50,7 +53,7 @@ export const CommentingBox = () => {
   }
 
 
-  return (<div className={classes.wrapper}>
+  return (<div className={classes.wrapper} style={{ height: `${visualViewport.height}px` }}>
     <div className={classes.commentingBox} style={{ marginBottom: shown ? '5rem' : '-9rem' }} >
       <div className={classes.opener} onClick={() => setShown(v => !v)} style={{ backgroundColor: shown ? 'var(--bg-color4)' : 'var(--accent-color)' }}>
         <span style={

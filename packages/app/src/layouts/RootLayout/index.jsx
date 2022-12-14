@@ -4,13 +4,15 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 
 export const RootLayout = () => {
   const { user, isLoggedIn } = useAuthContext()
+
+
   return (
     <div className={classes.rootLayout}>
       <nav className={classes.nav}>
         <NavLink to="/">
           <div className={classes.homeLink}>
             <img src="/64.png" alt=""></img>
-            <header>JOBEL</header>
+            <header >JOBEL</header>
           </div>
         </NavLink>
         <div className={classes.rightSide}>
