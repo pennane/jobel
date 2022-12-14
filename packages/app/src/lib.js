@@ -7,10 +7,10 @@ export const getPost = (token) => async (id) => {
   const res = await fetch(`${API_BASE_URL}posts/${id}`, {
     ...(token
       ? {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      }
+          headers: {
+            Authorization: `bearer ${token}`,
+          },
+        }
       : {}),
   })
   const json = await res.json()
@@ -33,6 +33,23 @@ export const createPost = (token) => async (data) => {
     throw { error: json.error, code: res.status }
   return json
 }
+
+export const createComment =
+  (token) =>
+  async ({ content, id }) => {
+    const res = await fetch(`${API_BASE_URL}comments/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ content }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}`,
+      },
+    })
+    const json = await res.json()
+    if (!String(res.status).startsWith(2))
+      throw { error: json.error, code: res.status }
+    return json
+  }
 
 export const randomInteger = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min

@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { getPost } from '../../lib'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import { CommentingBox } from '../../components/CommentingBox'
 
 export const PostView = () => {
   const { id } = useParams()
-  const { token } = useAuthContext()
+  const { token, isLoggedIn } = useAuthContext()
   const getPostWithToken = getPost(token)
+
 
   const { data, isFetching, error } = useQuery({
     queryKey: [id],
@@ -16,6 +18,8 @@ export const PostView = () => {
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: false
   })
+
+
 
   if (error) {
     return <p>{JSON.stringify(error)}</p>
@@ -34,6 +38,7 @@ export const PostView = () => {
 
   return (
     <div className={classes.mainView}>
+      {isLoggedIn && <CommentingBox />}
       <div className={classes.originalPost}>
         <Post {...post} />
       </div>
