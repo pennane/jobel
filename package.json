@@ -11,8 +11,5 @@
   "workspaces": [
     "packages/app",
     "packages/server"
-  ],
-  "dependencies": {
-    "react-toastify": "^9.1.1"
-  }
+  ]
 }
