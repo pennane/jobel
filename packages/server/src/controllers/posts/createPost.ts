@@ -50,6 +50,7 @@ export const createPost: RequestHandler = async (req, res) => {
     comments: [],
     color,
     userIds: [userId],
+    score: 0,
   })
 
   const savedPost = await post.save()
@@ -57,7 +58,7 @@ export const createPost: RequestHandler = async (req, res) => {
   res.status(200).send({
     post: {
       ...pick(
-        ['content', 'userId', '_id', 'comments', 'timeStamp', 'color'],
+        ['content', 'userId', '_id', 'comments', 'timeStamp', 'color', 'score'],
         savedPost
       ),
       you: true,

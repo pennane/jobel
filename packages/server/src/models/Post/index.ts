@@ -39,6 +39,8 @@ postSchema.set('toJSON', {
   virtuals: true,
 })
 
+postSchema.set('toObject', { virtuals: true })
+
 postSchema.virtual('commentCount').get(function () {
   return this.comments?.length > 0 ? this.comments.length : 0
 })

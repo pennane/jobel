@@ -5,6 +5,7 @@ import classes from '../../views/SettingsView/style.module.css'
 import { Form } from '../Form'
 import { InputButton } from '../InputButton';
 import { InputText } from '../InputText'
+import { useQueryClient } from 'react-query'
 
 const createLoginFormId = concat('login-')
 const USERNAME_ID = createLoginFormId('username')
@@ -14,6 +15,8 @@ export const LoginForm = () => {
   const { user, isLoggedIn, login } = useAuthContext()
   const [loading, setLoading] = useState(false)
 
+  const queryClient = useQueryClient()
+
   const handleLogin = async (event) => {
     event.preventDefault()
     setLoading(true)
@@ -22,6 +25,7 @@ export const LoginForm = () => {
     const password = path(['target', PASSWORD_ID, 'value'], event)
 
     await login({ userName, password })
+    queryClient.invalidateQueries('posts')
     setLoading(false)
   }
 

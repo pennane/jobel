@@ -1,9 +1,6 @@
 import { RequestHandler } from 'express'
 import { ObjectId } from 'mongoose'
-import {
-  path,
-  pick,
-} from 'ramda'
+import { path, pick } from 'ramda'
 import { EErrorType, throwError } from '../../middleware/errorHandler'
 import { Comment } from '../../models/Comment/'
 import { Post } from '../../models/Post'
@@ -14,7 +11,10 @@ const MINIMUM_COMMENT_CONTENT_LENGTH = 2
 const MAXIMUM_COMMENT_CONTENT_LENGTH = 250
 
 const isValidContent = (s?: string) =>
-  !s || typeof s !== 'string' || s.length < MINIMUM_COMMENT_CONTENT_LENGTH ||  s.length > MAXIMUM_COMMENT_CONTENT_LENGTH
+  !s ||
+  typeof s !== 'string' ||
+  s.length < MINIMUM_COMMENT_CONTENT_LENGTH ||
+  s.length > MAXIMUM_COMMENT_CONTENT_LENGTH
 
 const getPostId = path(['params', 'postId'])
 
@@ -56,7 +56,7 @@ export const createComment: RequestHandler = async (req, res) => {
     visibleUserId: getVisibleUserId(post, userId),
   })
 
-  const savedComment = await comment.save()
+  const savedComment = await comment.save({})
 
   await Post.updateOne(
     { _id: post._id },
@@ -67,9 +67,19 @@ export const createComment: RequestHandler = async (req, res) => {
     { $push: { comments: savedComment._id } }
   )
 
+  // const obu = savedComment.toObject()
+
   res.status(200).send({
     comment: pick(
-      ['_id', 'userId', 'content', 'postId', 'visibleUserId', 'timeStamp'],
+      [
+        '_id',
+        'userId',
+        'content',
+        'postId',
+        'visibleUserId',
+        'timeStamp',
+        'score',
+      ],
       savedComment
     ),
   })
