@@ -1,8 +1,21 @@
 import { API_BASE_URL } from './constants'
 
-export const getMorePosts = async ({ pageParam }) => {
-  const res = await fetch(`${API_BASE_URL}posts?olderThan=${pageParam || ''}`)
-  return await res.json()
+export const getMorePosts = (token) => {
+  return async ({ pageParam }) => {
+    const res = await fetch(
+      `${API_BASE_URL}posts?olderThan=${pageParam || ''}`,
+      {
+        ...(token
+          ? {
+              headers: {
+                Authorization: `bearer ${token}`,
+              },
+            }
+          : {}),
+      }
+    )
+    return await res.json()
+  }
 }
 export const getPost = (token) => async (id) => {
   const res = await fetch(`${API_BASE_URL}posts/${id}`, {

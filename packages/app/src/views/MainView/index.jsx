@@ -8,12 +8,11 @@ import { useIsOnScreen } from '../../hooks/useIsOnScreen'
 import { useAuthContext } from '../../hooks/useAuthContext'
 
 export const MainView = () => {
-
-  // const { token } = useAuthContext()
-  // console.log(token);
+  const { token } = useAuthContext()
+  const getMorepostsWithToken = getMorePosts(token)
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
     queryKey: ['posts'],
-    queryFn: getMorePosts,
+    queryFn: getMorepostsWithToken,
     getNextPageParam: (lastPage) =>
       lastPage.hasMore ? lastPage.lastTimeStamp : null,
     staleTime: 1000 * 10, // 10 seconds

@@ -80,7 +80,7 @@ export const Post = ({
         )}
       </section>
       <aside className={classes.aside}>
-        <Vote score={score} isLoggedIn={isLoggedIn} hasVoted={hasVoted} _id={_id} isComment={isComment} />
+        <Vote score={score} isLoggedIn={isLoggedIn} hasVoted={hasVoted} _id={_id} isComment={isComment} hideVisibleUserId={hideVisibleUserId} />
       </aside>
     </div>
   )
