@@ -25,6 +25,7 @@
   border-radius: 100%;
   box-shadow: var(--large-box-shadow);
   opacity: 0.7;
+  border: 1px solid var(--bg-color3);
 }
 
 .createPostLink:hover {

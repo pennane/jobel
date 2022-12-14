@@ -1,6 +1,7 @@
 .rootLayout {
   display: flex;
   flex-direction: column;
+  margin-bottom: 15rem;
 }
 
 .rootLayout > main {
