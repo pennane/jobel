@@ -10,7 +10,6 @@ export const Vote = ({
   hasVoted,
   isComment,
   _id,
-  hideVisibleUserId,
 }) => {
   const { id } = useParams()
   const { token } = useAuthContext()
@@ -19,7 +18,6 @@ export const Vote = ({
 
   const handleOnSuccess = (newData) => {
     if (!isComment) {
-      console.log('not comment')
       queryClient.setQueryData('posts', (oldData) => {
         const updated = oldData.pages.map((page) => ({
           hasMore: page.hasMore,
@@ -31,12 +29,10 @@ export const Vote = ({
         return { pages: updated, pageParams: oldData.pageParams }
       })
     }
-    console.log('3')
+
 
     queryClient.setQueryData(id, (oldData) => {
-      console.log(123)
       if (isComment) {
-        console.log('is comment')
         return {
           post: {
             ...oldData.post,
@@ -46,7 +42,6 @@ export const Vote = ({
           },
         }
       }
-      console.log('updating post view post')
       return { post: { ...oldData.post, ...newData.post } }
     })
   }

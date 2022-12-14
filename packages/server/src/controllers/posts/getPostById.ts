@@ -10,7 +10,6 @@ const parseHasVoted = (userId?: Types.ObjectId) => (post: IPost & Document) => {
   }
 
   const comments = post.comments.map((m) => {
-    console.log(m, userId)
     const obu = m.toObject()
     const withoutVoters = omit(['voters'], obu)
     return {

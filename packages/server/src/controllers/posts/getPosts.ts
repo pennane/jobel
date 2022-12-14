@@ -66,8 +66,6 @@ export const getPosts: RequestHandler = async (req, res) => {
     posts || []
   )
 
-  console.log(parsedPosts)
-
   res.send({
     posts: parsedPosts,
     hasMore,
