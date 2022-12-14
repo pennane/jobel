@@ -21,6 +21,7 @@
   padding: 0.5rem 0.5rem;
   box-shadow: var(--small-box-shadow);
   justify-content: space-between;
+  align-items: center;
 }
 
 .nav a {
@@ -60,4 +61,24 @@
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  .homeLink img {
+    width: 2rem;
+  }
+
+  .homeLink header {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .homeLink img {
+    margin-left: 0.5rem;
+  }
+
+  .homeLink header {
+    display: none;
+  }
 }
