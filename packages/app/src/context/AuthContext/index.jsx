@@ -59,9 +59,9 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const { token, user } = await authPost('login', { userName, password })
       setAuthValues({ token, user })
-      onSuccess({ token, user })
+      onSuccess?.({ token, user })
     } catch (e) {
-      onError(e)
+      onError?.(e)
     }
 
   }
@@ -73,18 +73,16 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const { token, user } = await authPost('signup', { userName, password })
       setAuthValues({ token, user })
-      onSuccess({ token, user })
+      onSuccess?.({ token, user })
     } catch (e) {
-      onError(e)
+      onError?.(e)
     }
-
-
   }
 
   const logout = async ({ onSuccess }) => {
     setToken(null)
     setUser(null)
-    onSuccess()
+    onSuccess?.()
   }
 
   useEffect(() => {
