@@ -51,7 +51,7 @@ export const LoginForm = () => {
 
   return (
     <div className={classes.loginForm}>
-      {isLoggedIn && 'logged in as ' + user.userName}
+      {isLoggedIn && 'logged in as ' + user?.profile?.userName}
       {!isLoggedIn && (
         <Form onSubmit={handleLogin}>
           <div>

@@ -41,7 +41,7 @@ export const login: RequestHandler = async (req, res) => {
   }
 
   const tokenPayload: JwtPayload = {
-    ...user,
+    ...user.toObject(),
   }
 
   const token = jwt.sign(tokenPayload, config.JWT_SECRET)
