@@ -23,14 +23,23 @@ export const RootLayout = () => {
       />
       <nav className={classes.nav}>
         <NavLink to="/">
-          <div className={classes.homeLink}>
+          <div
+            className={classes.homeLink}
+            onClick={() => {
+              if (window.location.pathname === '/') {
+                window.scrollTo(0, 0)
+              }
+            }}
+          >
             <img src="/64.png" alt=""></img>
             <header>JOBEL</header>
           </div>
         </NavLink>
         <div className={classes.rightSide}>
           <div>
-            {isLoggedIn && <div>Kirjautuneena sisään: {user?.profile?.userName}</div>}
+            {isLoggedIn && (
+              <div>Kirjautuneena sisään: {user?.profile?.userName}</div>
+            )}
           </div>
           <NavLink to="/settings">
             <div className={classes.navLink}>⚙️</div>
