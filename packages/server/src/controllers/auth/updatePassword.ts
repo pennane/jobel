@@ -6,6 +6,7 @@ import { config } from '../../config'
 import { EErrorType, throwError } from '../../middleware/errorHandler'
 
 const MAXIMUM_PASSWORD_LENGTH = 30
+const MINIMUM_PASSWORD_LENGTH = 5
 
 export const updatePassword: RequestHandler = async (req, res) => {
   const { newPassword, oldPassword } = req.body
@@ -22,11 +23,10 @@ export const updatePassword: RequestHandler = async (req, res) => {
   if (
     !newPassword ||
     typeof newPassword !== 'string' ||
+    newPassword.length < MINIMUM_PASSWORD_LENGTH ||
     newPassword.length > MAXIMUM_PASSWORD_LENGTH
   ) {
-    return res
-      .status(400)
-      .send({ error: 'newPassword missing or it is too long' })
+    return res.status(400).send({ error: 'newPassword invalid' })
   }
 
   const user = await User.findById(userId)
@@ -51,7 +51,9 @@ export const updatePassword: RequestHandler = async (req, res) => {
     return res.status(500).send({ error: 'password update failed' })
   }
   const tokenPayload: JwtPayload = {
-    ...savedUser.toObject(),
+    _id: savedUser._id,
+    profile: savedUser.profile,
+    roles: savedUser.roles,
   }
 
   const token = jwt.sign(tokenPayload, config.JWT_SECRET)

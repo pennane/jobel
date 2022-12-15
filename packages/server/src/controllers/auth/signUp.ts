@@ -58,7 +58,9 @@ export const signUp: RequestHandler = async (req, res) => {
   const savedUser = await user.save()
 
   const tokenPayload: JwtPayload = {
-    ...savedUser.toObject(),
+    _id: savedUser._id,
+    profile: savedUser.profile,
+    roles: savedUser.roles,
   }
 
   const token = jwt.sign(tokenPayload, config.JWT_SECRET)
