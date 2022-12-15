@@ -9,7 +9,6 @@ export const parseHasVoted =
     if (!userId) {
       return post.toObject()
     }
-    console.log(post, userId)
 
     return {
       ...post.toObject(),
