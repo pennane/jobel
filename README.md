@@ -1,6 +1,6 @@
 # Jobel
 
-This is a group project made for web development course 1 in Metropolia UAS. Jobel is a place where you can share your thoughts anonymously!
+This is a group project made for web development course 1 in Metropolia UAS. Done in 1 week. Jobel is a place where you can share your thoughts anonymously!
 
 ### Development preparation steps:
 
