@@ -19,9 +19,18 @@
   display: flex;
   gap: 1rem;
   padding: 0.5rem 0.5rem;
-  box-shadow: var(--small-box-shadow);
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px); /* Chrome and Opera */
+  box-shadow: var(--small-box-shadow), inset 0 0 0 200px rgb(32 32 32 / 8%);
+}
+
+.nav div {
+  pointer-events: all;
 }
 
 .nav a {
