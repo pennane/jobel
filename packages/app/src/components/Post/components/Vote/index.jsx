@@ -32,6 +32,7 @@ export const Vote = ({
 
 
     queryClient.setQueryData(id, (oldData) => {
+      if (!oldData) return
       if (isComment) {
         return {
           post: {
@@ -42,6 +43,7 @@ export const Vote = ({
           },
         }
       }
+
       return { post: { ...oldData.post, ...newData.post } }
     })
   }
