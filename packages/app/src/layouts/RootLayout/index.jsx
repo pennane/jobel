@@ -22,7 +22,7 @@ export const RootLayout = () => {
         }}
       />
       <nav className={classes.nav}>
-        <NavLink to="/">
+        <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
           <div className={classes.homeLink}>
             <img src="/64.png" alt=""></img>
             <header>JOBEL</header>
@@ -30,7 +30,9 @@ export const RootLayout = () => {
         </NavLink>
         <div className={classes.rightSide}>
           <div>
-            {isLoggedIn && <div>Kirjautuneena sisään: {user?.profile?.userName}</div>}
+            {isLoggedIn && (
+              <div>Kirjautuneena sisään: {user?.profile?.userName}</div>
+            )}
           </div>
           <NavLink to="/settings">
             <div className={classes.navLink}>⚙️</div>

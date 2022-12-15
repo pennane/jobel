@@ -31,6 +31,7 @@
   --secondary-color2: hsl(16deg 78% 58%);
   --secondary-color3: #8f47ff;
   --secondary-color4: #42a0ff;
+  scroll-behavior: smooth;
 }
 
 body {
