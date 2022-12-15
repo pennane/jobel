@@ -6,7 +6,9 @@ export enum ERole {
 }
 
 export type TTokenPayload = {
-  userName?: string
+  profile?: {
+    userName?: string
+  }
   _id?: Types.ObjectId
   roles?: ERole[]
 }
