@@ -5,6 +5,7 @@ import { useQuery } from 'react-query'
 import { getPost } from '../../lib'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { CommentingBox } from '../../components/CommentingBox'
+import { POST_STALE_TIME } from '../../constants'
 
 export const PostView = () => {
   const { id } = useParams()
@@ -15,7 +16,7 @@ export const PostView = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: [id],
     queryFn: () => getPostWithToken(id),
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: POST_STALE_TIME,
     retry: false
   })
 

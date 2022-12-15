@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
 import { Tag } from '../Tag'
+import { HIDE_POST_SCORE } from '../../constants'
 
 const EMOJIS = [
   [':jobel:', '/32.png'],
@@ -130,7 +131,7 @@ export const Post = ({
     toast(<Toast>Kopioitu leikepöydälle! </Toast>)
   }
 
-  if (score <= -5) {
+  if (score <= HIDE_POST_SCORE) {
     return null
   }
 

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useIsOnScreen } from '../../hooks/useIsOnScreen'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { Loader } from '../../components/Loader'
+import { POSTS_STALE_TIME } from '../../constants'
 
 export const MainView = () => {
   const { token } = useAuthContext()
@@ -16,7 +17,7 @@ export const MainView = () => {
     queryFn: getMorepostsWithToken,
     getNextPageParam: (lastPage) =>
       lastPage.hasMore ? lastPage.lastTimeStamp : null,
-    staleTime: 1000 * 10, // 10 seconds
+    staleTime: POSTS_STALE_TIME
   })
 
   const { isLoggedIn } = useAuthContext()

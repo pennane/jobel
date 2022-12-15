@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
+import { MIN_PASSWORD_LENGTH, MIN_USERNAME_LENGTH, MAX_USERNAME_LENGTH, MAX_PASSWORD_LENGTH } from '../../constants'
 
 const createLoginFormId = concat('login-')
 const USERNAME_ID = createLoginFormId('username')
@@ -56,11 +57,11 @@ export const LoginForm = () => {
         <Form onSubmit={handleLogin}>
           <div>
             <label htmlFor="login-username">Käyttäjätunnus:</label>
-            <InputText id={USERNAME_ID} maxLength={24} />
+            <InputText id={USERNAME_ID} maxLength={MAX_USERNAME_LENGTH} minLength={MIN_USERNAME_LENGTH} />
           </div>
           <div>
             <label htmlFor="login-password">Salasana: </label>
-            <InputText id={PASSWORD_ID} type="password" maxLength={30} />
+            <InputText id={PASSWORD_ID} type="password" maxLength={MAX_PASSWORD_LENGTH} minLength={MIN_PASSWORD_LENGTH} />
           </div>
           <InputButton
             type="submit"

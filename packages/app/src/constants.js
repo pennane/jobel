@@ -13,3 +13,19 @@ export const EXAMPLE_POST = {
 }
 
 export const COLORS = ['#800f3f', '#0f8022', '#b24822', '#5d23b2', '#242ab2']
+export const MAX_COMMENT_CONTENT_LENGTH = 250
+export const MIN_COMMENT_CONTENT_LENGTH = 2
+export const MAX_USERNAME_LENGTH = 24
+export const MIN_USERNAME_LENGTH = 3
+export const MAX_PASSWORD_LENGTH = 30
+export const MIN_PASSWORD_LENGTH = 5
+
+export const SHOW_LOGIN_AS_DEFAULT = true
+
+export const POST_STALE_TIME = 1000 * 60 // 1 minute
+export const POSTS_STALE_TIME = 1000 * 10 // 10 seconds
+
+export const LOCAL_STORAGE_TOKEN_KEY = 'jobel-auth-token'
+export const LOCAL_STORAGE_USER_KEY = 'jobel-user'
+
+export const HIDE_POST_SCORE = -5

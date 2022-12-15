@@ -1,11 +1,9 @@
 import { isNil } from 'ramda'
 import { createContext, useState, useEffect, React } from 'react'
-import { API_BASE_URL } from '../../constants'
+import { API_BASE_URL, LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_KEY } from '../../constants'
+
 
 export const AuthContext = createContext()
-
-const LOCAL_STORAGE_TOKEN_KEY = 'jobel-auth-token'
-const LOCAL_STORAGE_USER_KEY = 'jobel-user'
 
 const getLocalStorageValue = (key) => {
   try {
