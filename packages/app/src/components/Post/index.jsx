@@ -11,29 +11,70 @@ import { Tag } from '../Tag'
 
 const EMOJIS = [
   [':jobel:', '/32.png'],
-  [':adi:', '/arman.png'],
+  [':alien:', '/emojis/alien.png'],
+  [':3_hearts_smile:', '/emojis/3_hearts_smile.png'],
+  [':angry:', '/emojis/angry.png'],
+  [':anguished:', '/emojis/anguished.png'],
+  [':bomb:', '/emojis/bomb.png'],
+  [':call_me:', '/emojis/call_me.png'],
+  [':camel:', '/emojis/camel.png'],
+  [':cap:', '/emojis/cap.png'],
+  [':clap:', '/emojis/clap.png'],
+  [':clubmate:', '/emojis/clubmate.png'],
+  [':expressionless:', '/emojis/expressionless.png'],
+  [':eyes:', '/emojis/eyes.png'],
+  [':faded:', '/emojis/faded.png'],
+  [':fingers_crossed:', '/emojis/fingers_crossed.png'],
+  [':gun:', '/emojis/gun.png'],
+  [':heart_eyes_smile:', '/emojis/heart_eyes_smile.png'],
+  [':hl:', '/emojis/hl.png'],
+  [':jihuu:', '/emojis/jihuu.png'],
+  [':love_you_gesture:', '/emojis/love_you_gesture.png'],
+  [':lätty:', '/emojis/lätty.png'],
+  [':neutral_face:', '/emojis/neutral_face.png'],
+  [':pill:', '/emojis/pill.png'],
+  [':point_down:', '/emojis/point_down.png'],
+  [':point_up:', '/emojis/point_up.png'],
+  [':rainbow:', '/emojis/rainbow.png'],
+  [':robot:', '/emojis/robot.png'],
+  [':skii:', '/emojis/skii.png'],
+  [':skull:', '/emojis/skull.png'],
+  [':smile:', '/emojis/smile.png'],
+  [':sob:', '/emojis/sob.png'],
+  [':sunglass_smile:', '/emojis/sunglass_smile.png'],
+  [':thumbs_down:', '/emojis/thumbs_down.png'],
+  [':thumbs_up:', '/emojis/thumbs_up.png'],
+  [':weary:', '/emojis/weary.png'],
+  [':whitebag:', '/emojis/whitebag.png'],
+  [':wink:', '/emojis/wink.png'],
 ]
 
-const getEmoji = (text) => EMOJIS.find((m) => text.includes(m[0]))
+const includesCustomEmoji = (text) => EMOJIS.find((m) => text.includes(m[0]))
+const findCustomEmoji = (text) => EMOJIS.find((m) => m[0] === text)
+
+const emojiRegex = /:\w+:/g
 
 const parseEmoji = (content) => {
-  const emoji = getEmoji(content)
+  if (!includesCustomEmoji(content)) return content
+  const out = []
+  let lastIndex = 0
+  let i = 0
 
-  if (!emoji) {
-    return content
+  for (const match of content.matchAll(emojiRegex)) {
+    const customEmoji = findCustomEmoji(match[0])
+    if (!customEmoji) {
+      const newIndex = match.index + match[0].length
+      out.push(content.substring(lastIndex, newIndex))
+      lastIndex = newIndex
+      continue
+    }
+    lastIndex = match.index + match[0].length
+    out.push(<img alt="" className="emoji" src={customEmoji[1]} key={i} />)
+    i++
   }
+  out.push(content.substring(lastIndex, content.length))
 
-  // loput siit nykysest parse jobel shitist
-  return (
-    <>
-      {content.split(emoji[0]).map((str, i) => (
-        <React.Fragment key={i}>
-          {i > 0 && <img className="emoji" src={emoji[1]} />}
-          <span>{str}</span>
-        </React.Fragment>
-      ))}
-    </>
-  )
+  return out
 }
 
 const getIntlTimeAgo = (input) => {
