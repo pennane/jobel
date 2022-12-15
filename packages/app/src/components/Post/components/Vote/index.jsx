@@ -52,12 +52,12 @@ export const Vote = ({
   })
 
   const upVote = (e) => {
-    if (hasVoted) return
+    if (hasVoted || !isLoggedIn) return
     e.stopPropagation()
     mutate({ id: _id, isComment, score: 1 })
   }
   const downVote = (e) => {
-    if (hasVoted) return
+    if (hasVoted || !isLoggedIn) return
     e.stopPropagation()
     mutate({ id: _id, isComment, score: -1 })
   }
