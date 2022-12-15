@@ -72,15 +72,7 @@ export const Post = ({
     e.stopPropagation()
     navigator.clipboard.writeText(`${window.location.origin}/posts/${_id}`)
 
-    toast(<Toast>Kopioitu leikepöydälle! </Toast>, {
-      position: 'top-center',
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      theme: 'dark',
-    })
+    toast(<Toast>Kopioitu leikepöydälle! </Toast>)
   }
 
   if (score <= -5) {
