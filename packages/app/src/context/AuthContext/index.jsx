@@ -1,7 +1,6 @@
 import { isNil } from 'ramda'
 import { createContext, useState, useEffect, React } from 'react'
 import { API_BASE_URL } from '../../constants'
-import { randomInteger } from '../../lib'
 
 export const AuthContext = createContext()
 
@@ -129,18 +128,22 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     getInitialAuthValues().then(({ user, token }) => {
-      setTimeout(() => {
-        setAuthValues({ token, user })
-        setLoaded(true)
-      }, randomInteger(400, 650))
-
+      setAuthValues({ token, user })
+      setLoaded(true)
     })
   }, [])
 
-
   return (
     <AuthContext.Provider
-      value={{ user, login, signup, token, isLoggedIn: !!user, logout, hasLoaded: loaded }}
+      value={{
+        user,
+        login,
+        signup,
+        token,
+        isLoggedIn: !!user,
+        logout,
+        hasLoaded: loaded,
+      }}
     >
       {children}
     </AuthContext.Provider>
