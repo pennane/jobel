@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 550px;
+  max-width: 100%;
+  gap: 0.5rem;
+}
+.post {
+  animation: loader 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--small-box-shadow);
+  color: var(--text-color);
+  min-height: 220px;
+  width: 100%;
+}
+
+@keyframes loader {
+  0% {
+    background-color: hsl(223deg 96% 14%);
+  }
+  60% {
+    background-color: hsl(223deg 96% 10%);
+  }
+  100% {
+    background-color: hsl(223deg 96% 14%);
+  }
+}

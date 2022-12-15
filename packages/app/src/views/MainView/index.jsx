@@ -6,6 +6,7 @@ import { NewPostButton } from '../../components/NewPostButton'
 import { useState } from 'react'
 import { useIsOnScreen } from '../../hooks/useIsOnScreen'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import { Loader } from '../../components/Loader'
 
 export const MainView = () => {
   const { token } = useAuthContext()
@@ -51,7 +52,8 @@ export const MainView = () => {
                 ))}
             </div>
           ))}
-        {!hasNextPage && <p>Ei enempää joblauksia :D</p>}
+        {isFetching && <Loader />}
+        {!hasNextPage && pages && pages.length > 0 && <p>Ei enempää joblauksia :D</p>}
       </div>
     </div>
   )
