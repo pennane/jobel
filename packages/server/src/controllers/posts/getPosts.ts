@@ -9,9 +9,15 @@ export const parseHasVoted =
     if (!userId) {
       return post.toObject()
     }
+    console.log(post, userId)
 
-    // @ts-expect-error asdf
-    return { ...post.toObject(), hasVoted: post.voters.includes(userId) }
+    return {
+      ...post.toObject(),
+      // @ts-expect-error asdf
+      hasVoted: post.voters.includes(userId),
+      // @ts-expect-error asdf
+      you: post.userId == userId,
+    }
   }
 
 const parseDate = (s: unknown): Date | null => {
@@ -23,6 +29,7 @@ const parseDate = (s: unknown): Date | null => {
 
 const FIELDS = {
   _id: 1,
+  userId: 1,
   timeStamp: 1,
   content: 1,
   color: 1,
@@ -62,7 +69,7 @@ export const getPosts: RequestHandler = async (req, res) => {
   const lastTimeStamp = last(posts)?.timeStamp || null
 
   const parsedPosts = map(
-    pipe(parseHasVoted(userId), omit(['voters', 'comments'])),
+    pipe(parseHasVoted(userId), omit(['voters', 'comments', 'userId'])),
     posts || []
   )
 
