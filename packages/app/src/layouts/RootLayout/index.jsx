@@ -22,8 +22,15 @@ export const RootLayout = () => {
         }}
       />
       <nav className={classes.nav}>
-        <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
-          <div className={classes.homeLink}>
+        <NavLink to="/">
+          <div
+            className={classes.homeLink}
+            onClick={() => {
+              if (window.location.pathname === '/') {
+                window.scrollTo(0, 0)
+              }
+            }}
+          >
             <img src="/64.png" alt=""></img>
             <header>JOBEL</header>
           </div>
