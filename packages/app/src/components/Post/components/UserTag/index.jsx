@@ -1,11 +1,7 @@
-import classes from './style.module.css'
+import { Tag } from '../../../Tag'
 
 const parseVisibleUserId = (id) => (id === 0 ? 'og' : id)
 
 export const UserTag = ({ visibleUserId }) => {
-  return (
-    <div className={classes.userTag}>
-      <span>@{parseVisibleUserId(visibleUserId)}</span>
-    </div>
-  )
+  return <Tag>@{parseVisibleUserId(visibleUserId)}</Tag>
 }

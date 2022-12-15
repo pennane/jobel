@@ -7,6 +7,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
+import { Tag } from '../Tag'
 
 const parseJobel = (content) => {
   if (!content.includes(':jobel:')) return content
@@ -63,6 +64,7 @@ export const Post = ({
   visibleUserId,
   hideVisibleUserId,
   hasVoted,
+  you,
 }) => {
   const navigate = useNavigate()
   const { isLoggedIn } = useAuthContext()
@@ -89,6 +91,7 @@ export const Post = ({
       <section className={classes.section}>
         <header className={classes.header}>
           {!hideVisibleUserId && <UserTag visibleUserId={visibleUserId} />}{' '}
+          {you && <Tag>SINÄ</Tag>}
           {getIntlTimeAgo(timeStamp)}
         </header>
         <main className={classes.main}>{parseJobel(content)}</main>
