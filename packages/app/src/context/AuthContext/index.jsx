@@ -50,7 +50,6 @@ const getInitialAuthValues = async () => {
     return { token: null, user: null }
   }
 
-
   const response = await fetch(`${API_BASE_URL}users/me`, {
     method: 'GET',
     headers: {
@@ -58,11 +57,9 @@ const getInitialAuthValues = async () => {
     },
   })
 
-
   if (String(response.status).startsWith(4)) {
     return { token: null, user: null }
   }
-
 
   const json = await response.json()
 
@@ -83,12 +80,12 @@ const getInitialAuthValues = async () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [loaded, setLoaded] = useState(false)
-  const [token, setToken] = useState()
-  const [user, setUser] = useState()
+  const [token, setToken] = useState(null)
+  const [user, setUser] = useState(null)
 
   const setAuthValues = ({ user, token }) => {
-    setToken(token)
     setUser(user)
+    setToken(token)
   }
 
   const login = async ({ userName, password, onSuccess, onError }) => {
@@ -115,8 +112,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   const logout = async ({ onSuccess }) => {
-    setToken(null)
-    setUser(null)
+    setAuthValues({ token: null, user: null })
     onSuccess?.()
   }
 
@@ -131,12 +127,10 @@ export const AuthContextProvider = ({ children }) => {
   }, [user, loaded])
 
   useEffect(() => {
-    getInitialAuthValues()
-      .then(({ user, token }) => {
-        setUser(user)
-        setToken(token)
-        setLoaded(true)
-      })
+    getInitialAuthValues().then(({ user, token }) => {
+      setAuthValues({ token, user })
+      setLoaded(true)
+    })
   }, [])
 
   return (
