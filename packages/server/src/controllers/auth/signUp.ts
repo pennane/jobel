@@ -10,7 +10,6 @@ const MAXIMUM_PASSWORD_LENGTH = 30
 const MINIMUM_USERNAME_LENGTH = 3
 const MINIMUM_PASSWORD_LENGTH = 5
 
-
 export const signUp: RequestHandler = async (req, res) => {
   const { userName, password } = req.body
 
@@ -20,7 +19,9 @@ export const signUp: RequestHandler = async (req, res) => {
     userName.length > MAXIMUM_USERNAME_LENGTH ||
     userName.length < MINIMUM_USERNAME_LENGTH
   ) {
-    return res.status(400).send({ error: `userName length has to be between ${MINIMUM_USERNAME_LENGTH} and ${MAXIMUM_USERNAME_LENGTH}` })
+    return res.status(400).send({
+      error: `userName length has to be between ${MINIMUM_USERNAME_LENGTH} and ${MAXIMUM_USERNAME_LENGTH}`,
+    })
   }
 
   if (
@@ -29,7 +30,9 @@ export const signUp: RequestHandler = async (req, res) => {
     password.length > MAXIMUM_PASSWORD_LENGTH ||
     password.length < MINIMUM_PASSWORD_LENGTH
   ) {
-    return res.status(400).send({ error: `password length has to be between ${MINIMUM_PASSWORD_LENGTH} and ${MAXIMUM_PASSWORD_LENGTH}` })
+    return res.status(400).send({
+      error: `password length has to be between ${MINIMUM_PASSWORD_LENGTH} and ${MAXIMUM_PASSWORD_LENGTH}`,
+    })
   }
 
   const userWithSameUserName = await User.findOne(
@@ -55,9 +58,7 @@ export const signUp: RequestHandler = async (req, res) => {
   const savedUser = await user.save()
 
   const tokenPayload: JwtPayload = {
-    userName: savedUser.profile.userName,
-    _id: savedUser._id,
-    roles: savedUser.roles,
+    ...savedUser.toObject(),
   }
 
   const token = jwt.sign(tokenPayload, config.JWT_SECRET)

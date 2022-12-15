@@ -41,9 +41,7 @@ export const login: RequestHandler = async (req, res) => {
   }
 
   const tokenPayload: JwtPayload = {
-    userName: user.profile.userName,
-    _id: user._id,
-    roles: user.roles,
+    ...user.toObject(),
   }
 
   const token = jwt.sign(tokenPayload, config.JWT_SECRET)
