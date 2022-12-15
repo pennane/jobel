@@ -4,19 +4,23 @@ import { Vote } from './components/Vote'
 import { UserTag } from './components/UserTag'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import React from 'react'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
 
 const parseJobel = (content) => {
-  if (!content.includes(":jobel:")) return content
+  if (!content.includes(':jobel:')) return content
 
-  return (<>
-    {content.split(':jobel:').map((str, i) => <React.Fragment key={i}>
-      {i > 0 && <img className='jobel' src={'/32.png'} />}
-      <span>{str}</span>
-    </React.Fragment>)}
-  </>)
+  return (
+    <>
+      {content.split(':jobel:').map((str, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && <img className="jobel" src={'/32.png'} />}
+          <span>{str}</span>
+        </React.Fragment>
+      ))}
+    </>
+  )
 }
 
 const getIntlTimeAgo = (input) => {
@@ -32,7 +36,6 @@ const getIntlTimeAgo = (input) => {
     seconds: 1,
   }
 
-
   const secondsElapsed = (date.getTime() - Date.now()) / 1000
 
   for (let key in ranges) {
@@ -44,7 +47,7 @@ const getIntlTimeAgo = (input) => {
 }
 
 const parseCommentsText = (n) => {
-  if (n === 1) return n + 'kommentti'
+  if (n === 1) return n + ' kommentti'
   return n + ' kommenttia'
 }
 
@@ -68,16 +71,16 @@ export const Post = ({
   const handleShare = (e) => {
     e.stopPropagation()
     navigator.clipboard.writeText(`${window.location.origin}/posts/${_id}`)
-  
-    toast(<Toast>Kopioitu leikepöydälle! </Toast> ,{
-      position: "top-center",
+
+    toast(<Toast>Kopioitu leikepöydälle! </Toast>, {
+      position: 'top-center',
       autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: false,
-      theme: "dark",
-      });
+      theme: 'dark',
+    })
   }
 
   return (
@@ -94,14 +97,24 @@ export const Post = ({
         </header>
         <main className={classes.main}>{parseJobel(content)}</main>
         {!isComment && (
-          <footer className={classes.footer}>{parseCommentsText(commentCount)}
-        
-          <div className={classes.shareButton} onClick={handleShare}>🔗</div>
+          <footer className={classes.footer}>
+            {parseCommentsText(commentCount)}
+
+            <div className={classes.shareButton} onClick={handleShare}>
+              🔗
+            </div>
           </footer>
         )}
       </section>
       <aside className={classes.aside}>
-        <Vote score={score} isLoggedIn={isLoggedIn} hasVoted={hasVoted} _id={_id} isComment={isComment} hideVisibleUserId={hideVisibleUserId} />
+        <Vote
+          score={score}
+          isLoggedIn={isLoggedIn}
+          hasVoted={hasVoted}
+          _id={_id}
+          isComment={isComment}
+          hideVisibleUserId={hideVisibleUserId}
+        />
       </aside>
     </div>
   )
