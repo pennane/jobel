@@ -11,18 +11,24 @@ const parseHasVoted = (userId?: Types.ObjectId) => (post: IPost & Document) => {
 
   const comments = post.comments.map((m) => {
     const obu = m.toObject()
-    const withoutVoters = omit(['voters'], obu)
+    const withoutVoters = omit(['voters', 'userId'], obu)
     return {
       ...withoutVoters,
       // @ts-expect-error asdf
       hasVoted: m.voters.includes(userId),
+      // @ts-expect-error asdf
+      you: m.userId == userId,
     }
   })
+  const obu = post.toObject()
+  const withoutUserId = omit(['userId'], obu)
 
   return {
-    ...post.toObject(),
+    ...withoutUserId,
     // @ts-expect-error asdf
     hasVoted: post.voters.includes(userId),
+    // @ts-expect-error asdf
+    you: post.userId == userId,
     comments,
   }
 }
@@ -44,7 +50,10 @@ export const getPostById: RequestHandler = async (req, res) => {
     visibleUserId: 1,
     voters: 1,
   })
-    .populate('comments', '_id visibleUserId timeStamp content score voters')
+    .populate(
+      'comments',
+      '_id visibleUserId timeStamp content score voters userId'
+    )
     .exec()
 
   if (isNil(post)) {
