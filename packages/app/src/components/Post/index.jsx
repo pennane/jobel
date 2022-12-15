@@ -83,6 +83,10 @@ export const Post = ({
     })
   }
 
+  if (score <= -5) {
+    return null
+  }
+
   return (
     <div
       className={`${classes.post} background-color${color}`}
