@@ -5,6 +5,7 @@ import { SignupForm } from '../../components/SignupForm'
 import { LogoutButton } from '../../components/LogoutButton'
 import { useState } from 'react'
 import { Button } from '../../components/Button'
+import { SHOW_LOGIN_AS_DEFAULT } from '../../constants'
 
 const getBackgroundColor = (isLoggedIn, showLogin) => {
   if (!isLoggedIn && !showLogin) return "var(--color4)"
@@ -13,7 +14,7 @@ const getBackgroundColor = (isLoggedIn, showLogin) => {
 
 export const SettingsView = () => {
   const { isLoggedIn } = useAuthContext()
-  const [showLogin, setShowLogin] = useState(true)
+  const [showLogin, setShowLogin] = useState(SHOW_LOGIN_AS_DEFAULT)
 
   const toggleView = () => {
     setShowLogin(!showLogin)

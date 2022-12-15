@@ -8,6 +8,7 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { useQueryClient } from 'react-query'
+import { MAX_COMMENT_CONTENT_LENGTH, MIN_COMMENT_CONTENT_LENGTH } from '../../constants'
 
 export const CreatePostView = () => {
     const color = useMemo(() => randomInteger(0, COLORS.length - 1), [])
@@ -37,11 +38,11 @@ export const CreatePostView = () => {
         e.preventDefault()
         const data = e.target["post-content"].value
 
-        if (data.length > 250) {
-            alert("Postaus voi olla maksimissaan 250 merkkiä")
+        if (data.length > MAX_COMMENT_CONTENT_LENGTH) {
+            alert("Postaus voi olla maksimissaan MAX_COMMENT_CONTENT_LENGTH merkkiä")
             return
         }
-        if (data.length < 2) {
+        if (data.length < MIN_COMMENT_CONTENT_LENGTH) {
             alert("Liian lyhyt postaus")
             return
         }
@@ -65,7 +66,7 @@ export const CreatePostView = () => {
                         <textarea
                             id="post-content"
                             className={classes.post}
-                            maxLength={250}
+                            maxLength={MAX_COMMENT_CONTENT_LENGTH}
                             placeholder={isLoggedIn ? 'Jaa ajatuksesi ja kokemuksesi muilla joblaajille!' : 'Nyt seikkailet väärillä sivuilla, vain käyttäjillä on oikeus tänne. Kirjaudu sisään tai rekisteröidy päästäksesi käsiksi postaamiseen'}
                             disabled={!isLoggedIn}>
                         </textarea>

@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
+import { MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH, MAX_USERNAME_LENGTH, MIN_USERNAME_LENGTH } from '../../constants'
 
 const createSignupFormId = concat('signup-')
 const USERNAME_ID = createSignupFormId('username')
@@ -56,7 +57,7 @@ export const SignupForm = () => {
         <Form onSubmit={handleSignup}>
           <div>
             <label htmlFor="signup-username">Käyttäjätunnus:</label>
-            <InputText id={USERNAME_ID} maxLength={24} />
+            <InputText id={USERNAME_ID} maxLength={MAX_USERNAME_LENGTH} minLength={MIN_USERNAME_LENGTH} />
           </div>
           <div>
             <label htmlFor="signup-password">Salasana: </label>
@@ -64,7 +65,8 @@ export const SignupForm = () => {
               autoComplete="new-password"
               id={PASSWORD_ID}
               type="password"
-              maxLength={30}
+              maxLength={MAX_PASSWORD_LENGTH}
+              minLength={MIN_PASSWORD_LENGTH}
             />
           </div>
           <InputButton
