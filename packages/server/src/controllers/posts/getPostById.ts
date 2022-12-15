@@ -49,6 +49,7 @@ export const getPostById: RequestHandler = async (req, res) => {
     content: 1,
     visibleUserId: 1,
     voters: 1,
+    userId: 1,
   })
     .populate(
       'comments',
@@ -59,7 +60,10 @@ export const getPostById: RequestHandler = async (req, res) => {
   if (isNil(post)) {
     return res.status(404).send({ error: 'Post does not exist' })
   }
-  const parsedPost = pipe(parseHasVoted(userId), omit(['voters']))(post)
+  const parsedPost = pipe(
+    parseHasVoted(userId),
+    omit(['voters', 'userId'])
+  )(post)
 
   res.send({ post: parsedPost })
 }
