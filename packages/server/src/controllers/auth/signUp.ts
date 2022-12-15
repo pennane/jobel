@@ -7,6 +7,9 @@ import { config } from '../../config'
 
 const MAXIMUM_USERNAME_LENGTH = 24
 const MAXIMUM_PASSWORD_LENGTH = 30
+const MINIMUM_USERNAME_LENGTH = 3
+const MINIMUM_PASSWORD_LENGTH = 5
+
 
 export const signUp: RequestHandler = async (req, res) => {
   const { userName, password } = req.body
@@ -14,17 +17,19 @@ export const signUp: RequestHandler = async (req, res) => {
   if (
     !userName ||
     typeof userName !== 'string' ||
-    userName.length > MAXIMUM_USERNAME_LENGTH
+    userName.length > MAXIMUM_USERNAME_LENGTH ||
+    userName.length < MINIMUM_USERNAME_LENGTH
   ) {
-    return res.status(400).send({ error: 'userName missing or it is too long' })
+    return res.status(400).send({ error: `userName length has to be between ${MINIMUM_USERNAME_LENGTH} and ${MAXIMUM_USERNAME_LENGTH}` })
   }
 
   if (
     !password ||
     typeof password !== 'string' ||
-    password.length > MAXIMUM_PASSWORD_LENGTH
+    password.length > MAXIMUM_PASSWORD_LENGTH ||
+    password.length < MINIMUM_PASSWORD_LENGTH
   ) {
-    return res.status(400).send({ error: 'password missing or it is too long' })
+    return res.status(400).send({ error: `password length has to be between ${MINIMUM_PASSWORD_LENGTH} and ${MAXIMUM_PASSWORD_LENGTH}` })
   }
 
   const userWithSameUserName = await User.findOne(
