@@ -23,14 +23,12 @@
 
 @keyframes loader {
   0% {
-    background-color: hsl(223deg 96% 13%);
+    background-color: hsl(223deg 96% 14%);
   }
-
   60% {
-    background-color: hsl(223deg 96% 20%);
+    background-color: hsl(223deg 96% 10%);
   }
-
   100% {
-    background-color: hsl(223deg 96% 13%);
+    background-color: hsl(223deg 96% 14%);
   }
 }

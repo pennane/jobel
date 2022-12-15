@@ -38,8 +38,8 @@ export const RootLayout = () => {
         </div>
       </nav>
       <main>
-        {!hasLoaded && <Loader loading={true} />}
-        {hasLoaded && <Outlet />}
+        {hasLoaded && <Loader />}
+        {!hasLoaded && <Outlet />}
       </main>
       <footer></footer>
     </div>

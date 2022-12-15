@@ -6,8 +6,7 @@ const FakePost = ({ i }) => {
   </div>
 }
 
-export const Loader = ({ loading }) => {
-  if (!loading) return null
+export const Loader = () => {
   return (
     <div className={classes.wrapper}>
       {repeat(0, 10).map((_, i) => <FakePost i={i} key={i} />)}
