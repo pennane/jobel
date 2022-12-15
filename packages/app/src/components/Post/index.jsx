@@ -23,6 +23,10 @@ const parseEmoji = (content) => {
   let i = 0
 
   for (const match of content.matchAll(emojiRegex)) {
+    if (i === 0) {
+      out.push(content.substring(lastIndex, match.index))
+    }
+
     const customEmoji = findCustomEmoji(match[0])
     if (!customEmoji) {
       const newIndex = match.index + match[0].length
