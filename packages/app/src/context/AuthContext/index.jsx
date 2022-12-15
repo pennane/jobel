@@ -4,8 +4,8 @@ import { API_BASE_URL } from '../../constants'
 
 export const AuthContext = createContext()
 
-const LOCAL_STORAGE_TOKEN_KEY = "jobel-auth-token"
-const LOCAL_STORAGE_USER_KEY = "jobel-user"
+const LOCAL_STORAGE_TOKEN_KEY = 'jobel-auth-token'
+const LOCAL_STORAGE_USER_KEY = 'jobel-user'
 
 const getLocalStorageValue = (key) => {
   try {
@@ -25,16 +25,13 @@ const setLocalStorageValue = (key, value) => {
   localStorage.setItem(key, JSON.stringify([value]))
 }
 
-
-
-
 const authPost = async (endpoint, data) => {
   const response = await fetch(`${API_BASE_URL}auth/${endpoint}`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
 
   const json = await response.json()
@@ -45,9 +42,49 @@ const authPost = async (endpoint, data) => {
   return json
 }
 
+const getInitialAuthValues = async () => {
+  const token = getLocalStorageValue(LOCAL_STORAGE_TOKEN_KEY)
+  const user = getLocalStorageValue(LOCAL_STORAGE_USER_KEY)
+
+  if (!token || !user) {
+    return { token: null, user: null }
+  }
+
+
+  const response = await fetch(`${API_BASE_URL}users/me`, {
+    method: 'GET',
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  })
+
+
+  if (String(response.status).startsWith(4)) {
+    return { token: null, user: null }
+  }
+
+
+  const json = await response.json()
+
+  const dataUser = json?.user
+
+  if (!dataUser) {
+    return {
+      token,
+      user,
+    }
+  }
+
+  return {
+    token,
+    user: dataUser,
+  }
+}
+
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(getLocalStorageValue(LOCAL_STORAGE_TOKEN_KEY))
-  const [user, setUser] = useState(getLocalStorageValue(LOCAL_STORAGE_USER_KEY))
+  const [loaded, setLoaded] = useState(false)
+  const [token, setToken] = useState()
+  const [user, setUser] = useState()
 
   const setAuthValues = ({ user, token }) => {
     setToken(token)
@@ -63,9 +100,7 @@ export const AuthContextProvider = ({ children }) => {
     } catch (e) {
       onError?.(e)
     }
-
   }
-
 
   const signup = async ({ userName, password, onSuccess, onError }) => {
     if (!userName || !password) return
@@ -86,15 +121,28 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    if (!loaded || token === undefined) return
     setLocalStorageValue(LOCAL_STORAGE_TOKEN_KEY, token)
-  }, [token])
+  }, [token, loaded])
 
   useEffect(() => {
+    if (!loaded || token === undefined) return
     setLocalStorageValue(LOCAL_STORAGE_USER_KEY, user)
-  }, [user])
+  }, [user, loaded])
+
+  useEffect(() => {
+    getInitialAuthValues()
+      .then(({ user, token }) => {
+        setUser(user)
+        setToken(token)
+        setLoaded(true)
+      })
+  }, [])
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, token, isLoggedIn: !!user, logout }}>
+    <AuthContext.Provider
+      value={{ user, login, signup, token, isLoggedIn: !!user, logout }}
+    >
       {children}
     </AuthContext.Provider>
   )
