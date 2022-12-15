@@ -24,7 +24,7 @@ export const SignupForm = () => {
 
   const handleSuccess = () => {
     queryClient.invalidateQueries()
-    toast(<Toast>Uusi käyttäjätili tehty</Toast>)
+    toast(<Toast>Uusi käyttäjätili luotu</Toast>)
     navigate('/')
   }
 
