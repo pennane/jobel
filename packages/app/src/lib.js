@@ -14,7 +14,10 @@ export const getMorePosts = (token) => {
           : {}),
       }
     )
-    return await res.json()
+    const json = await res.json()
+    if (!String(res.status).startsWith(2))
+      throw { error: json.error, code: res.status }
+    return json
   }
 }
 export const getPost = (token) => async (id) => {

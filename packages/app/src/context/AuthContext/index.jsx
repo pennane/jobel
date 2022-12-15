@@ -36,7 +36,12 @@ const authPost = async (endpoint, data) => {
     },
     body: JSON.stringify(data)
   })
+
   const json = await response.json()
+
+  if (!String(response.status).startsWith(2))
+    throw { error: json.error, code: response.status }
+
   return json
 }
 
@@ -49,24 +54,37 @@ export const AuthContextProvider = ({ children }) => {
     setUser(user)
   }
 
-  const login = async ({ userName, password }) => {
+  const login = async ({ userName, password, onSuccess, onError }) => {
     if (!userName || !password) return
+    try {
+      const { token, user } = await authPost('login', { userName, password })
+      setAuthValues({ token, user })
+      onSuccess({ token, user })
+    } catch (e) {
+      onError(e)
+    }
 
-    const { token, user } = await authPost('login', { userName, password })
-    setAuthValues({ token, user })
   }
 
 
-  const signup = async ({ userName, password }) => {
+  const signup = async ({ userName, password, onSuccess, onError }) => {
     if (!userName || !password) return
 
-    const { token, user } = await authPost('signup', { userName, password })
-    setAuthValues({ token, user })
+    try {
+      const { token, user } = await authPost('signup', { userName, password })
+      setAuthValues({ token, user })
+      onSuccess({ token, user })
+    } catch (e) {
+      onError(e)
+    }
+
+
   }
 
-  const logout = () => {
+  const logout = async ({ onSuccess }) => {
     setToken(null)
     setUser(null)
+    onSuccess()
   }
 
   useEffect(() => {
