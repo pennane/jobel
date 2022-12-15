@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
 
+
 const parseJobel = (content) => {
   if (!content.includes(':jobel:')) return content
 
@@ -83,6 +84,7 @@ export const Post = ({
     })
   }
 
+  if(score >= -4) {
   return (
     <div
       className={`${classes.post} background-color${color}`}
@@ -118,4 +120,8 @@ export const Post = ({
       </aside>
     </div>
   )
+}
+else {
+  return null
+}
 }
