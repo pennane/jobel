@@ -51,7 +51,7 @@ export const MainView = () => {
                 ))}
             </div>
           ))}
-        {!hasNextPage && <p>Ei enempää joblauksia :D</p>}
+        {!hasNextPage && pages && pages.length > 0 && <p>Ei enempää joblauksia :D</p>}
       </div>
     </div>
   )
