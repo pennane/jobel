@@ -9,14 +9,26 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
 import { Tag } from '../Tag'
 
-const parseJobel = (content) => {
-  if (!content.includes(':jobel:')) return content
+const EMOJIS = [
+  [':jobel:', '/32.png'],
+  [':adi:', '/arman.png'],
+]
 
+const getEmoji = (text) => EMOJIS.find((m) => text.includes(m[0]))
+
+const parseEmoji = (content) => {
+  const emoji = getEmoji(content)
+
+  if (!emoji) {
+    return content
+  }
+
+  // loput siit nykysest parse jobel shitist
   return (
     <>
-      {content.split(':jobel:').map((str, i) => (
+      {content.split(emoji[0]).map((str, i) => (
         <React.Fragment key={i}>
-          {i > 0 && <img className="jobel" src={'/32.png'} />}
+          {i > 0 && <img className="emoji" src={emoji[1]} />}
           <span>{str}</span>
         </React.Fragment>
       ))}
@@ -94,7 +106,7 @@ export const Post = ({
           {you && <Tag>SINÄ</Tag>}
           {getIntlTimeAgo(timeStamp)}
         </header>
-        <main className={classes.main}>{parseJobel(content)}</main>
+        <main className={classes.main}>{parseEmoji(content)}</main>
         {!isComment && (
           <footer className={classes.footer}>
             {parseCommentsText(commentCount)}
