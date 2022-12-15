@@ -3,9 +3,10 @@ import classes from './style.module.css'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Loader } from '../../components/Loader'
 
 export const RootLayout = () => {
-  const { user, isLoggedIn } = useAuthContext()
+  const { user, isLoggedIn, hasLoaded } = useAuthContext()
 
   return (
     <div className={classes.rootLayout}>
@@ -37,7 +38,8 @@ export const RootLayout = () => {
         </div>
       </nav>
       <main>
-        <Outlet />
+        {!hasLoaded && <Loader loading={true} />}
+        {hasLoaded && <Outlet />}
       </main>
       <footer></footer>
     </div>
