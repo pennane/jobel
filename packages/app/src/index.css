@@ -89,3 +89,12 @@ h1 {
   display: inline-block;
   object-fit: contain;
 }
+
+img.post-image {
+  display: flex;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 0.25rem;
+  margin: 0.5rem 0;
+}

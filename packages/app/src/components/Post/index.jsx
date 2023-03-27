@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Toast } from '../Toast'
 import { Tag } from '../Tag'
 import { HIDE_POST_SCORE, EMOJIS } from '../../constants'
+import { intersperse } from 'ramda'
 
 
 const includesCustomEmoji = (text) => EMOJIS.find((m) => text.includes(m[0]))
@@ -41,6 +42,28 @@ const parseEmoji = (content) => {
   out.push(content.substring(lastIndex, content.length))
 
   return out
+}
+
+const parsePartForImage = content => p => {
+  if (typeof p !== "string") return p
+  const [match, url] = MD_IMAGE_REGEX.exec(p) || []
+  if (!match || !url) return p
+  const parts = content.split(match)
+  return intersperse(<img alt="" className='post-image' src={url} />, parts)
+}
+
+// eslint-disable-next-line no-useless-escape
+const MD_IMAGE_REGEX = /!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/
+
+/**
+ * 
+ * @param {import('react').ReactNode[]} content 
+ * @returns 
+ */
+const parseImages = (content) => {
+  console.log(content);
+  if (!Array.isArray(content)) return parsePartForImage(content)(content)
+  return content.flatMap(parsePartForImage(content))
 }
 
 const getIntlTimeAgo = (input) => {
@@ -113,7 +136,7 @@ export const Post = ({
           {you && <Tag>SINÄ</Tag>}
           {getIntlTimeAgo(timeStamp)}
         </header>
-        <main className={classes.main}>{parseEmoji(content)}</main>
+        <main className={classes.main}>{parseImages(parseEmoji(content))}</main>
         {!isComment && (
           <footer className={classes.footer}>
             {parseCommentsText(commentCount)}
