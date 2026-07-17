@@ -1,0 +1,54 @@
+name: Deploy Server
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [packages/server/**]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build --workspace=packages/server
+
+      - name: Create deploy bundle
+        run: |
+          mkdir -p /tmp/jobel-server
+          cp -r packages/server/dist /tmp/jobel-server/dist
+          cp packages/server/package.json /tmp/jobel-server/package.json
+          cd /tmp/jobel-server
+          npm install --omit=dev
+          tar -czf /tmp/jobel-server.tar.gz -C /tmp jobel-server
+
+      - name: Deploy
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ vars.VPS_HOST }}
+          VPS_HOST_KEY: ${{ vars.VPS_HOST_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "$VPS_HOST_KEY" >> ~/.ssh/known_hosts
+          scp /tmp/jobel-server.tar.gz root@"$VPS_HOST":/tmp/jobel-server.tar.gz
+          ssh root@"$VPS_HOST" bash -s <<'REMOTE'
+            systemctl stop jobel || true
+            rm -rf /opt/jobel/dist /opt/jobel/node_modules /opt/jobel/package.json
+            mkdir -p /opt/jobel
+            tar -xzf /tmp/jobel-server.tar.gz -C /opt --no-same-owner
+            mv /opt/jobel-server/* /opt/jobel/
+            rmdir /opt/jobel-server
+            rm /tmp/jobel-server.tar.gz
+            systemctl start jobel
+          REMOTE

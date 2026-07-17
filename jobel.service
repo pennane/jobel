@@ -1,0 +1,14 @@
+[Unit]
+Description=Jobel Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/jobel
+ExecStart=/usr/bin/node --experimental-specifier-resolution=node dist/index.js
+Restart=on-failure
+RestartSec=5
+EnvironmentFile=/opt/jobel/.env
+
+[Install]
+WantedBy=multi-user.target
