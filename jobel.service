@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/opt/jobel
-ExecStart=/usr/bin/npx tsx dist/index.js
+ExecStart=/usr/bin/node --import ./loader.js dist/index.js
 Restart=on-failure
 RestartSec=5
 EnvironmentFile=/opt/jobel/.env

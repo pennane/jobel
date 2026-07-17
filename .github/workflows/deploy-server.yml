@@ -27,6 +27,8 @@ jobs:
           mkdir -p /tmp/jobel-server
           cp -r packages/server/dist /tmp/jobel-server/dist
           cp packages/server/package.json /tmp/jobel-server/package.json
+          cp packages/server/loader.js /tmp/jobel-server/loader.js
+          cp packages/server/resolve.js /tmp/jobel-server/resolve.js
           cd /tmp/jobel-server
           npm install --omit=dev
           tar -czf /tmp/jobel-server.tar.gz -C /tmp jobel-server
